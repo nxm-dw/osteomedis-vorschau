@@ -173,7 +173,10 @@
     <rect class="kk-feld" data-zone="schulter" x="0"   y="140" width="104" height="344"/>
     <rect class="kk-feld" data-zone="schulter" x="216" y="140" width="104" height="344"/>
     <rect class="kk-feld" data-zone="huefte"   x="104" y="314" width="112" height="120"/>
-    <rect class="kk-feld" data-zone="knie"     x="80"  y="434" width="160" height="326"/>
+    <!-- Die Beine liegen bei x 106…214 (aus den Pfaddaten abgelesen), die
+         Hände enden bei x 86. Das Feld begann bei x=80 und färbte deshalb
+         die oberen Fingerglieder mit ein. Ab x=100 bleibt es an den Beinen. -->
+    <rect class="kk-feld" data-zone="knie"     x="100" y="434" width="120" height="326"/>
   </g>
 
   <!-- Die Kontur zuletzt, damit sie über den Feldern liegt -->

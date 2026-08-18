@@ -164,6 +164,9 @@
 
   <!-- Leuchtfelder: schlichte Balken, von der Maske in Körperform gebracht -->
   <g clip-path="url(#kk-maske)">
+    <!-- Grundfläche des Körpers, damit die Figur nicht als Drahtgitter
+         auf grauem Grund steht. Liegt unter den Leuchtfeldern. -->
+    <rect class="kk-fuell" x="0" y="0" width="320" height="760"/>
     <rect class="kk-feld" data-zone="kopf"     x="0"   y="0"   width="320" height="92"/>
     <rect class="kk-feld" data-zone="kiefer"   x="0"   y="92"  width="320" height="30"/>
     <rect class="kk-feld" data-zone="ruecken"  x="104" y="122" width="112" height="192"/>

@@ -250,4 +250,18 @@ if (n2) n2.textContent = DOW[d.getDay()].slice(0, 2) + ", " + d.getDate() + "."
 + (d.getMonth() + 1) + ". · " + (frei ? frei.zeit : "");
 }
 })();
+
+var filmStart = $(".film-start");
+if (filmStart) {
+filmStart.addEventListener("click", function () {
+var id = this.dataset.vimeo;
+var rahmen = document.createElement("iframe");
+rahmen.src = "https://player.vimeo.com/video/" + id + "?autoplay=1&dnt=1";
+rahmen.title = "Imagefilm Osteomedis";
+rahmen.allow = "autoplay; fullscreen; picture-in-picture";
+rahmen.setAttribute("allowfullscreen", "");
+this.parentNode.replaceChild(rahmen, this);
+rahmen.focus();
+});
+}
 })();

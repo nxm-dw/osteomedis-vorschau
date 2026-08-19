@@ -86,7 +86,7 @@
       </div>
       <form class="finder fade" action="/osteomedis-vorschau/b/beschwerden/" method="get" role="search">
         <label class="sr" for="finderFeld">Was tut weh?</label>
-        <input class="finder-feld" id="finderFeld" name="q" type="search"
+        <input class="finder-feld" id="finderFeld" name="q" type="text" inputmode="search"
                placeholder="Was tut weh? Zum Beispiel: Kreuz, Migräne, Tennisarm"
                autocomplete="off" spellcheck="false"
                aria-describedby="finderHinweis" aria-expanded="false"
@@ -376,17 +376,15 @@
       <div class="vfilter fade">
         <input type="radio" name="vf" id="vf-alle" class="sr" checked>
         <label for="vf-alle">Alle <span>11</span></label>
-        <input type="radio" name="vf" id="vf-kern" class="sr">
-        <label for="vf-kern">Kern <span>2</span></label>
-        <input type="radio" name="vf" id="vf-geraet" class="sr">
-        <label for="vf-geraet">Gerät <span>3</span></label>
-        <input type="radio" name="vf" id="vf-sport" class="sr">
-        <label for="vf-sport">Sport <span>4</span></label>
-        <input type="radio" name="vf" id="vf-ueberweisung" class="sr">
-        <label for="vf-ueberweisung">Überweisung <span>1</span></label>
+        <input type="radio" name="vf" id="vf-mitdenhaenden" class="sr">
+        <label for="vf-mitdenhaenden">Mit den Händen <span>6</span></label>
+        <input type="radio" name="vf" id="vf-mitgeraet" class="sr">
+        <label for="vf-mitgeraet">Mit Gerät <span>3</span></label>
+        <input type="radio" name="vf" id="vf-mitnadeln" class="sr">
+        <label for="vf-mitnadeln">Mit Nadeln <span>2</span></label>
       </div>
       <ol class="vindex fade">
-        <li class="vkachel" data-tags="Kern">
+        <li class="vkachel" data-art="Mit den Händen">
           <a href="/osteomedis-vorschau/b/leistungen/osteopathie/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-osteopathie.webp" width="760" height="950" alt="Osteopathie in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -394,7 +392,7 @@
               <span class="vmeta"><span class="vdur">50–60 Min</span><i>Kern</i></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="Kern">
+        <li class="vkachel" data-art="Mit den Händen">
           <a href="/osteomedis-vorschau/b/leistungen/chiropraktik/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-chiropraktik.webp" width="760" height="950" alt="Chiropraktik in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -402,7 +400,7 @@
               <span class="vmeta"><span class="vdur">50 Min</span><i>Kern</i></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="Gerät Sport">
+        <li class="vkachel" data-art="Mit Gerät">
           <a href="/osteomedis-vorschau/b/leistungen/stosswellentherapie/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-stosswellentherapie.webp" width="760" height="950" alt="Stoßwellentherapie in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -410,7 +408,7 @@
               <span class="vmeta"><span class="vdur">15–30 Min</span><i>Gerät</i><i>Sport</i></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="Gerät Sport">
+        <li class="vkachel" data-art="Mit Gerät">
           <a href="/osteomedis-vorschau/b/leistungen/hochenergie-induktionstherapie/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-hochenergie-induktionstherapie.webp" width="760" height="950" alt="Hochenergie-Induktionstherapie in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -418,7 +416,7 @@
               <span class="vmeta"><span class="vdur">10–20 Min</span><i>Gerät</i><i>Sport</i></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="">
+        <li class="vkachel" data-art="Mit Nadeln">
           <a href="/osteomedis-vorschau/b/leistungen/akupunktur/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-akupunktur.webp" width="760" height="950" alt="Akupunktur in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -426,7 +424,7 @@
               <span class="vmeta"><span class="vdur">30–45 Min</span></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="Sport">
+        <li class="vkachel" data-art="Mit Nadeln">
           <a href="/osteomedis-vorschau/b/leistungen/dry-needling/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-dry-needling.webp" width="760" height="950" alt="Dry Needling in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -434,7 +432,7 @@
               <span class="vmeta"><span class="vdur">30 Min</span><i>Sport</i></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="Sport">
+        <li class="vkachel" data-art="Mit den Händen">
           <a href="/osteomedis-vorschau/b/leistungen/myofasziale-loesetechniken/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-myofasziale-loesetechniken.webp" width="760" height="950" alt="Myofasziale Lösetechniken in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -442,7 +440,7 @@
               <span class="vmeta"><span class="vdur">30–50 Min</span><i>Sport</i></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="">
+        <li class="vkachel" data-art="Mit den Händen">
           <a href="/osteomedis-vorschau/b/leistungen/triggerpunkt-therapie/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-triggerpunkt-therapie.webp" width="760" height="950" alt="Triggerpunkt-Therapie in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -450,7 +448,7 @@
               <span class="vmeta"><span class="vdur">30 Min</span></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="Gerät">
+        <li class="vkachel" data-art="Mit Gerät">
           <a href="/osteomedis-vorschau/b/leistungen/elektrotherapie-ultraschall/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-elektrotherapie-ultraschall.webp" width="760" height="950" alt="Elektrotherapie &amp; Ultraschall in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -458,7 +456,7 @@
               <span class="vmeta"><span class="vdur">15–20 Min</span><i>Gerät</i></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="">
+        <li class="vkachel" data-art="Mit den Händen">
           <a href="/osteomedis-vorschau/b/leistungen/schroepfen/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-schroepfen.webp" width="760" height="950" alt="Schröpfen in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">
@@ -466,7 +464,7 @@
               <span class="vmeta"><span class="vdur">20–30 Min</span></span>
             </span>
           </a></li>
-        <li class="vkachel" data-tags="Überweisung">
+        <li class="vkachel" data-art="Mit den Händen">
           <a href="/osteomedis-vorschau/b/leistungen/kieferbehandlung-cmd/" data-cursor>
             <span class="vbild"><img src="/osteomedis-vorschau/assets/l-kieferbehandlung-cmd.webp" width="760" height="950" alt="Kieferbehandlung bei CMD in der Praxis Osteomedis" loading="lazy" decoding="async"></span>
             <span class="vtext">

@@ -62,6 +62,20 @@
         <span class="ln"><i style="--d:.3s">ist ein System.</i></span>
         <span class="ln"><i class="alt" style="--d:.45s">Wir behandeln ihn wie eins.</i></span>
       </h1>
+      <div class="hero-finder fade" style="--d:.5s"><form class="finder im-hero" action="/osteomedis-vorschau/a/beschwerden/" method="get" role="search">
+        <label class="sr" for="finderFeld">Was tut weh?</label>
+        <input class="finder-feld" id="finderFeld" name="q" type="text" inputmode="search"
+               placeholder="Was tut weh?"
+               autocomplete="off" spellcheck="false"
+               aria-describedby="finderHinweis" aria-expanded="false"
+               aria-controls="finderTreffer" role="combobox">
+        <button class="btn btn-lg finder-knopf" type="submit">Finden
+          <span class="arw" aria-hidden="true">&#8594;</span></button>
+        <p class="finder-hinweis" id="finderHinweis">Zum Beispiel <b>Kreuz</b>,
+          <b>Migräne</b> oder <b>Tennisarm</b> — sag es in deinen Worten, wir ordnen
+          es ein. Eine Diagnose ersetzt das nicht.</p>
+        <ul class="finder-treffer" id="finderTreffer" role="listbox" hidden></ul>
+      </form></div>
       <div class="hero-foot">
         <div class="cell fade" style="--d:.6s"><span class="eyebrow">Nächster freier Termin</span>
           <b class="mono" style="display:flex;align-items:center;gap:.6rem">
@@ -83,65 +97,58 @@
       <span class="mq-txt">Laufband anhalten</span></button>
   </div>
 
+<script type="application/json" id="finderDaten">{"i":{"beschwerden/ruecken-nacken":["anamnese","ausfuehrlicher","ausfuhrlicher","ausstrahlung","bandscheibe","behandelt","bein","blockaden","buckel","buerostuhl","burostuhl","bws","dauert","eine","eingeschraenkte","eingeschrankte","erstbehandlung","euro","fingern","fuessen","fussen","genick","gesaess","gesass","haltung","hexenschuss","hws","ischias","kopfdrehung","kostet","kreuz","kreuzschmerzen","kribbeln","lumbago","lws","manueller","minuten","morgens","nach","nacken","nackenschmerzen","nicht","noch","noetig","notig","oder","rucken","ruckenschmerzen","ruecken","rueckenschmerzen","schmerz","schulter","schulterblatt","selben","sitzen","sondern","staerksten","starksten","stechender","steifer","steifer hals","stelle","suchen","taub","taubheitsgefuehl","taubheitsgefuhl","termin","uberweisung","ueberweisung","unteren","untersuchung","ursache","verspannt","verspannung","verspannungen","vorfall","wirbel","wirbelsaeule","wirbelsaule","wird","ziehender"],"beschwerden/kopfschmerz-migraene":["aufstehen","aufsteigt","aura","band","behandeln","beim","benommen","bereiche","brummschadel","brummschaedel","dauert","diese","drehschwindel","druckender","drueckender","eine","einseitiger","entstehen","erstbehandlung","euro","finden","geraeuschempfindlichkeit","gerauschempfindlichkeit","hinterkopf","kiefer","kopf","kopfdrehen","kopfschmerz","kopfschmerzen","kopfweh","kostet","licht","lichtempfindlich","manuell","migraene","migrane","minuten","nacken","nicht","noetig","notig","oder","ohrgeraeusche","ohrgerausche","pulsierender","schadel","schaedel","schlaefe","schlafe","schmerz","schulterguertel","schultergurtel","schwindel","sondern","spannungskopfschmerz","stirn","ubelkeit","uberweisung","uebelkeit","ueberweisung","untersuchen","viele","zusammen"],"beschwerden/kiefer-cmd":["aeussert","arbeiten","aufbissschiene","aussert","befund","behandeln","beim","beissen","cmd","craniomandibulaere","craniomandibulaeren","craniomandibulare","craniomandibularen","dysfunktion","einer","erstbehandlung","euro","gaehnen","gahnen","gesichtsschmerz","kauen","kaumuskeln","kaumuskulatur","kiefer","kiefergelenk","kieferschmerz","knacken","knirschen","kopfschmerz","manuell","mehr","minuten","morgens","mundoeffnung","mundoffnung","nacken","nackenverspannung","nicht","oder","ohne","ohr","ohrgeraeusch","ohrgeraeusche","ohrgerausch","ohrgerausche","pfeifen im ohr","reiben","schiene","schmerz","schulterverspannung","selben","sich","termin","tinnitus","verspannte","weggeht","weit","zaehne","zaehneknirschen","zahne","zahneknirschen","zusammen"],"performance/nach-der-verletzung":["achilles","achillessehne","andere","aufbau","ausweichbewegungen","baenderriss","banderriss","behandeln","belastbar","belastbarkeit","belastung","beschwerden","beweglichkeit","bewegung","bruch","comeback","derselben","eigentlichen","einer","einschraenkungen","einschrankungen","ellenbogen","entscheidet","erstbehandlung","euro","ferse","fersensporn","gefuehl","gefuhl","golferellenbogen","instabil","knie","kraftdefizit","kreuzband","meniskus","minuten","muskelfaserriss","nach","narbe","nicht","ohne","op","operation","pruefen","prufen","reha","restschmerz","riss","ruckfall","ruckkehr","rueckfall","rueckkehr","schmerz","sehne","sehnenansatz","seitenvergleich","sondern","sportverletzung","sprunggelenk","statik","stelle","steuern","strukturen","tennisarm","trauen","uber","uberlasten","ueber","ueberlasten","umgeknickt","verbliebenen","verletzt","verletzung","wieder fit","wiederaufbau","wiederkehrende","wochen","zerrung","zuruck","zurueck"],"performance/regeneration":["ausgelaugt","behandlung","beine","belastung","bleibt","dafuer","dafur","dass","davon","durchblutung","erholt","erholung","erschoepft","erschopft","geben","gewebe","gleitfaehigkeit","gleitfahigkeit","gutem","harten","kaputt","kleine","lange","leer","leistung","loesen","losen","marathon","mehr","mehrere","minuten","mude","muede","muskelkater","muskulaere","muskulare","musst","nach","nach dem lauf","nicht","ohne","pause","platt","regeneration","schlaf","schlecht geschlafen","schwere","schwere beine","seine","spannung","stagniert","teil","training","trainings","trainingsblock","trainingsblocken","trainingsbloecken","trainingseinheiten","trotz","turnier","uber","ubertraining","ueber","uebertraining","ungewoehnlich","ungewohnlich","unterbrechen","verbessern","wehwehchen","wettkampf","wiederkehrende","zuruck","zurueck"],"performance/leistung-praevention":["analyse","behandeln","beim","besser werden","bevor","beweglichkeit","bleiben","brustwirbelsaeule","brustwirbelsaule","check","chronisch","daraus","deutliche","dieselbe","dysbalance","dysbalancen","eingeschraenkt","eingeschraenkte","eingeschrankt","eingeschrankte","einschraenkungen","einschrankungen","erstbehandlung","euro","finden","gefundenen","huefte","hufte","immer","immer dieselbe stelle","immer wieder","kraft","kuendigen","kundigen","leistung","leistungsfaehig","leistungsfahig","leiten","meisten","minuten","mobilitaet","mobilitat","nach","oder","praevention","pravention","pruefen","prufen","rotation","schneller","screening","seitenunterschied","seitenunterschiede","sich","statik","stelle","technikprobleme","training","trainingsempfehlungen","trotz","uberlastungsschaden","ubung","ueberlastungsschaeden","uebung","vorbeugen","vorsorge","wehtun","zwickt"]},"n":{"beschwerden/ruecken-nacken":["Mein Rücken tut weh","Rücken & Nacken","Verspannungen, Blockaden, Ischias, Bandscheibe"],"beschwerden/kopfschmerz-migraene":["Ich habe Kopfschmerzen","Kopf & Migräne","Spannungskopfschmerz, Migräne, Schwindel"],"beschwerden/kiefer-cmd":["Mein Kiefer knackt","Kiefer & CMD","Knirschen, Kieferschmerz, Tinnitus"],"performance/nach-der-verletzung":["Ich war verletzt","Nach der Verletzung","Zurück in Belastung, ohne Rückfall"],"performance/regeneration":["Ich bin ausgelaugt","Regeneration","Nach Wettkampf und harten Trainingsblöcken"],"performance/leistung-praevention":["Ich will vorbeugen","Leistung & Prävention","Dysbalancen finden, bevor sie wehtun"]}}</script>
   <section class="sec findersec" id="finder">
     <div class="wrap">
       <div class="sec-head wide">
-        <p class="eyebrow fade">Wobei können wir helfen?</p>
-        <h2 class="d3 fade" style="--d:.08s">Sag uns, was los ist.</h2>
+        <p class="eyebrow fade">Oder wähle direkt</p>
+        <h2 class="d3 fade" style="--d:.08s">Sechs Anliegen, sechs Wege.</h2>
       </div>
-      <form class="finder fade" action="/osteomedis-vorschau/a/beschwerden/" method="get" role="search">
-        <label class="sr" for="finderFeld">Was tut weh?</label>
-        <input class="finder-feld" id="finderFeld" name="q" type="text" inputmode="search"
-               placeholder="Was tut weh? Zum Beispiel: Kreuz, Migräne, Tennisarm"
-               autocomplete="off" spellcheck="false"
-               aria-describedby="finderHinweis" aria-expanded="false"
-               aria-controls="finderTreffer" role="combobox">
-        <button class="btn finder-knopf" type="submit">Finden
-          <span class="arw" aria-hidden="true">&#8594;</span></button>
-        <p class="finder-hinweis" id="finderHinweis">Wir ordnen dein Anliegen ein —
-          eine Diagnose ersetzt das nicht.</p>
-        <ul class="finder-treffer" id="finderTreffer" role="listbox" hidden></ul>
-      </form>
       <div class="ziele fade" id="ziele">
         <a class="ziel" href="/osteomedis-vorschau/a/beschwerden/ruecken-nacken/" data-cursor>
           <span class="zbild"><img src="/osteomedis-vorschau/assets/t-ruecken-nacken.webp" width="760" height="950" alt="" loading="lazy" decoding="async"></span>
           <span class="ztext">
             <b>Mein Rücken tut weh</b>
             <span class="zfach">Rücken &amp; Nacken</span>
+            
           </span></a>
         <a class="ziel" href="/osteomedis-vorschau/a/beschwerden/kopfschmerz-migraene/" data-cursor>
           <span class="zbild"><img src="/osteomedis-vorschau/assets/t-kopfschmerz-migraene.webp" width="760" height="950" alt="" loading="lazy" decoding="async"></span>
           <span class="ztext">
             <b>Ich habe Kopfschmerzen</b>
             <span class="zfach">Kopf &amp; Migräne</span>
+            
           </span></a>
         <a class="ziel" href="/osteomedis-vorschau/a/beschwerden/kiefer-cmd/" data-cursor>
           <span class="zbild"><img src="/osteomedis-vorschau/assets/t-kiefer-cmd.webp" width="760" height="950" alt="" loading="lazy" decoding="async"></span>
           <span class="ztext">
             <b>Mein Kiefer knackt</b>
             <span class="zfach">Kiefer &amp; CMD</span>
+            
           </span></a>
         <a class="ziel" href="/osteomedis-vorschau/a/performance/nach-der-verletzung/" data-cursor>
           <span class="zbild"><img src="/osteomedis-vorschau/assets/t-nach-der-verletzung.webp" width="760" height="950" alt="" loading="lazy" decoding="async"></span>
           <span class="ztext">
             <b>Ich war verletzt</b>
             <span class="zfach">Nach der Verletzung</span>
+            
           </span></a>
         <a class="ziel" href="/osteomedis-vorschau/a/performance/regeneration/" data-cursor>
           <span class="zbild"><img src="/osteomedis-vorschau/assets/t-regeneration.webp" width="760" height="950" alt="" loading="lazy" decoding="async"></span>
           <span class="ztext">
             <b>Ich bin ausgelaugt</b>
             <span class="zfach">Regeneration</span>
+            
           </span></a>
         <a class="ziel" href="/osteomedis-vorschau/a/performance/leistung-praevention/" data-cursor>
           <span class="zbild"><img src="/osteomedis-vorschau/assets/t-leistung-praevention.webp" width="760" height="950" alt="" loading="lazy" decoding="async"></span>
           <span class="ztext">
             <b>Ich will vorbeugen</b>
             <span class="zfach">Leistung &amp; Prävention</span>
+            
           </span></a>
       </div>
     </div>
-    <script type="application/json" id="finderDaten">{"i":{"beschwerden/ruecken-nacken":["anamnese","ausfuehrlicher","ausfuhrlicher","ausstrahlung","bandscheibe","behandelt","bein","blockaden","buckel","buerostuhl","burostuhl","bws","dauert","eine","eingeschraenkte","eingeschrankte","erstbehandlung","euro","fingern","fuessen","fussen","genick","gesaess","gesass","haltung","hexenschuss","hws","ischias","kopfdrehung","kostet","kreuz","kreuzschmerzen","kribbeln","lumbago","lws","manueller","minuten","morgens","nach","nacken","nackenschmerzen","nicht","noch","noetig","notig","oder","rucken","ruckenschmerzen","ruecken","rueckenschmerzen","schmerz","schulter","schulterblatt","selben","sitzen","sondern","staerksten","starksten","stechender","steifer","steifer hals","stelle","suchen","taub","taubheitsgefuehl","taubheitsgefuhl","termin","uberweisung","ueberweisung","unteren","untersuchung","ursache","verspannt","verspannung","verspannungen","vorfall","wirbel","wirbelsaeule","wirbelsaule","wird","ziehender"],"beschwerden/kopfschmerz-migraene":["aufstehen","aufsteigt","aura","band","behandeln","beim","benommen","bereiche","brummschadel","brummschaedel","dauert","diese","drehschwindel","druckender","drueckender","eine","einseitiger","entstehen","erstbehandlung","euro","finden","geraeuschempfindlichkeit","gerauschempfindlichkeit","hinterkopf","kiefer","kopf","kopfdrehen","kopfschmerz","kopfschmerzen","kopfweh","kostet","licht","lichtempfindlich","manuell","migraene","migrane","minuten","nacken","nicht","noetig","notig","oder","ohrgeraeusche","ohrgerausche","pulsierender","schadel","schaedel","schlaefe","schlafe","schmerz","schulterguertel","schultergurtel","schwindel","sondern","spannungskopfschmerz","stirn","ubelkeit","uberweisung","uebelkeit","ueberweisung","untersuchen","viele","zusammen"],"beschwerden/kiefer-cmd":["aeussert","arbeiten","aufbissschiene","aussert","befund","behandeln","beim","beissen","cmd","craniomandibulaere","craniomandibulaeren","craniomandibulare","craniomandibularen","dysfunktion","einer","erstbehandlung","euro","gaehnen","gahnen","gesichtsschmerz","kauen","kaumuskeln","kaumuskulatur","kiefer","kiefergelenk","kieferschmerz","knacken","knirschen","kopfschmerz","manuell","mehr","minuten","morgens","mundoeffnung","mundoffnung","nacken","nackenverspannung","nicht","oder","ohne","ohr","ohrgeraeusch","ohrgeraeusche","ohrgerausch","ohrgerausche","pfeifen im ohr","reiben","schiene","schmerz","schulterverspannung","selben","sich","termin","tinnitus","verspannte","weggeht","weit","zaehne","zaehneknirschen","zahne","zahneknirschen","zusammen"],"performance/nach-der-verletzung":["achilles","achillessehne","andere","aufbau","ausweichbewegungen","baenderriss","banderriss","behandeln","belastbar","belastbarkeit","belastung","beschwerden","beweglichkeit","bewegung","bruch","comeback","derselben","eigentlichen","einer","einschraenkungen","einschrankungen","ellenbogen","entscheidet","erstbehandlung","euro","ferse","fersensporn","gefuehl","gefuhl","golferellenbogen","instabil","knie","kraftdefizit","kreuzband","meniskus","minuten","muskelfaserriss","nach","narbe","nicht","ohne","op","operation","pruefen","prufen","reha","restschmerz","riss","ruckfall","ruckkehr","rueckfall","rueckkehr","schmerz","sehne","sehnenansatz","seitenvergleich","sondern","sportverletzung","sprunggelenk","statik","stelle","steuern","strukturen","tennisarm","trauen","uber","uberlasten","ueber","ueberlasten","umgeknickt","verbliebenen","verletzt","verletzung","wieder fit","wiederaufbau","wiederkehrende","wochen","zerrung","zuruck","zurueck"],"performance/regeneration":["ausgelaugt","behandlung","beine","belastung","bleibt","dafuer","dafur","dass","davon","durchblutung","erholt","erholung","erschoepft","erschopft","geben","gewebe","gleitfaehigkeit","gleitfahigkeit","gutem","harten","kaputt","kleine","lange","leer","leistung","loesen","losen","marathon","mehr","mehrere","minuten","mude","muede","muskelkater","muskulaere","muskulare","musst","nach","nach dem lauf","nicht","ohne","pause","platt","regeneration","schlaf","schlecht geschlafen","schwere","schwere beine","seine","spannung","stagniert","teil","training","trainings","trainingsblock","trainingsblocken","trainingsbloecken","trainingseinheiten","trotz","turnier","uber","ubertraining","ueber","uebertraining","ungewoehnlich","ungewohnlich","unterbrechen","verbessern","wehwehchen","wettkampf","wiederkehrende","zuruck","zurueck"],"performance/leistung-praevention":["analyse","behandeln","beim","besser werden","bevor","beweglichkeit","bleiben","brustwirbelsaeule","brustwirbelsaule","check","chronisch","daraus","deutliche","dieselbe","dysbalance","dysbalancen","eingeschraenkt","eingeschraenkte","eingeschrankt","eingeschrankte","einschraenkungen","einschrankungen","erstbehandlung","euro","finden","gefundenen","huefte","hufte","immer","immer dieselbe stelle","immer wieder","kraft","kuendigen","kundigen","leistung","leistungsfaehig","leistungsfahig","leiten","meisten","minuten","mobilitaet","mobilitat","nach","oder","praevention","pravention","pruefen","prufen","rotation","schneller","screening","seitenunterschied","seitenunterschiede","sich","statik","stelle","technikprobleme","training","trainingsempfehlungen","trotz","uberlastungsschaden","ubung","ueberlastungsschaeden","uebung","vorbeugen","vorsorge","wehtun","zwickt"]},"n":{"beschwerden/ruecken-nacken":["Mein Rücken tut weh","Rücken & Nacken","Verspannungen, Blockaden, Ischias, Bandscheibe"],"beschwerden/kopfschmerz-migraene":["Ich habe Kopfschmerzen","Kopf & Migräne","Spannungskopfschmerz, Migräne, Schwindel"],"beschwerden/kiefer-cmd":["Mein Kiefer knackt","Kiefer & CMD","Knirschen, Kieferschmerz, Tinnitus"],"performance/nach-der-verletzung":["Ich war verletzt","Nach der Verletzung","Zurück in Belastung, ohne Rückfall"],"performance/regeneration":["Ich bin ausgelaugt","Regeneration","Nach Wettkampf und harten Trainingsblöcken"],"performance/leistung-praevention":["Ich will vorbeugen","Leistung & Prävention","Dysbalancen finden, bevor sie wehtun"]}}</script>
   </section>
   <section class="sec" id="beschwerden">
     <div class="wrap">

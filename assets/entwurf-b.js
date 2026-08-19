@@ -264,4 +264,87 @@ this.parentNode.replaceChild(rahmen, this);
 rahmen.focus();
 });
 }
+
+(function () {
+var feld = document.getElementById("finderFeld");
+var liste = document.getElementById("finderTreffer");
+var daten = document.getElementById("finderDaten");
+if (!feld || !liste || !daten) return;
+var D;
+try { D = JSON.parse(daten.textContent); } catch (e) { return; }
+var wurzel = feld.form.getAttribute("action").replace(/beschwerden\/$/, "");
+
+function norm(s) {
+return s.toLowerCase()
+.replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss")
+.replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+}
+var index = {};
+Object.keys(D.i).forEach(function (slug) {
+index[slug] = D.i[slug].map(norm);
+});
+function suche(eingabe) {
+var teile = norm(eingabe).split(" ").filter(function (w) { return w.length >= 3; });
+if (!teile.length) return [];
+var punkte = {};
+Object.keys(index).forEach(function (slug) {
+var p = 0;
+teile.forEach(function (w) {
+index[slug].forEach(function (k) {
+if (k === w) p += 10;              // volltreffer
+else if (k.indexOf(w) === 0) p += 6;  // wortanfang
+else if (k.indexOf(w) > -1) p += 3;   // enthalten
+else if (w.length >= 5 && w.indexOf(k) === 0) p += 4; // eingabe länger
+});
+});
+if (p) punkte[slug] = p;
+});
+return Object.keys(punkte)
+.sort(function (a, b) { return punkte[b] - punkte[a]; })
+.slice(0, 4);
+}
+var aktiv = -1;
+function zeichne(treffer) {
+aktiv = -1;
+if (!treffer.length) {
+liste.hidden = true; liste.innerHTML = "";
+feld.setAttribute("aria-expanded", "false");
+return;
+}
+liste.innerHTML = treffer.map(function (slug, i) {
+var n = D.n[slug];
+return '<li role="option" id="ft' + i + '" aria-selected="false">'
++ '<a href="' + wurzel + slug + '/">'
++ '<b>' + n[0] + "</b>"
++ '<span class="ft-fach">' + n[1] + "</span>"
++ '<span class="ft-teaser">' + n[2] + "</span>"
++ '<span class="ft-go" aria-hidden="true">→</span></a></li>';
+}).join("");
+liste.hidden = false;
+feld.setAttribute("aria-expanded", "true");
+}
+function markiere(i) {
+var opts = liste.querySelectorAll("li");
+if (!opts.length) return;
+aktiv = (i + opts.length) % opts.length;
+opts.forEach(function (o, k) {
+o.setAttribute("aria-selected", k === aktiv ? "true" : "false");
+});
+feld.setAttribute("aria-activedescendant", "ft" + aktiv);
+}
+feld.addEventListener("input", function () { zeichne(suche(this.value)); });
+feld.addEventListener("keydown", function (e) {
+var opts = liste.querySelectorAll("li");
+if (e.key === "ArrowDown") { e.preventDefault(); markiere(aktiv + 1); }
+else if (e.key === "ArrowUp") { e.preventDefault(); markiere(aktiv - 1); }
+else if (e.key === "Escape") { zeichne([]); this.blur(); }
+else if (e.key === "Enter" && aktiv > -1 && opts[aktiv]) {
+e.preventDefault(); opts[aktiv].querySelector("a").click();
+}
+});
+
+document.addEventListener("click", function (e) {
+if (!feld.form.contains(e.target)) zeichne([]);
+});
+})();
 })();

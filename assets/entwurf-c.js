@@ -822,11 +822,19 @@ z.forEach(function(el){ io.observe(el); });
 
 (function(){
 var liste = $("#cIndex"); if (!liste) return;
-var bilder = $$(".c-index-bild img");
-$$("a[data-bild]", liste).forEach(function(a){
-function zeige(){ bilder.forEach(function(b){ b.classList.toggle("is-on", b.dataset.bild === a.dataset.bild); }); }
-a.addEventListener("pointerenter", zeige); a.addEventListener("focus", zeige);
+var bilder = $$(".c-index-bild img, .c2-index-bild img"); if (!bilder.length) return;
+var zeilen = $$("a[data-bild]", liste), aktiv = 0, ruhe = true;
+function zeige(n){
+aktiv = (n + bilder.length) % bilder.length;
+bilder.forEach(function(b){ b.classList.toggle("is-on", b.dataset.bild === String(aktiv)); });
+zeilen.forEach(function(z){ z.classList.toggle("is-on", z.dataset.bild === String(aktiv)); });
+}
+zeilen.forEach(function(a){
+function hin(){ ruhe = false; zeige(parseInt(a.dataset.bild, 10)); }
+a.addEventListener("pointerenter", hin); a.addEventListener("focus", hin);
 });
+liste.addEventListener("pointerleave", function(){ ruhe = true; });
+if (!RM) setInterval(function(){ if (ruhe) zeige(aktiv + 1); }, 3200);
 })();
 
 (function(){

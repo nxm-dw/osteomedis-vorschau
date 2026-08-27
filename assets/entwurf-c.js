@@ -795,7 +795,7 @@ var $  = function(s,r){ return (r||document).querySelector(s); };
 var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
 
 setTimeout(function(){
-$$(".c-hero .fade, .c-hero h1, .c-kopf .fade, .c-kopf h1, .c-kurz .fade").forEach(function(el){
+$$(".c-hero .fade, .c-hero h1, .c2-hero .fade, .c2-hero h1, .c-kopf .fade, .c-kopf h1, .c-kurz .fade").forEach(function(el){
 el.classList.add("in");
 });
 }, 60);

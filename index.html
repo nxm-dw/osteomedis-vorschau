@@ -19,18 +19,19 @@
 </style>
 </head>
 <body>
-<h1>Zwei Entwürfe für Osteomedis</h1>
-<p>Dieselben Inhalte, zwei eigenständige Gestaltungen. Wähle einen — die Wahl
+<h1>Drei Entwürfe für Osteomedis</h1>
+<p>Dieselben Inhalte, drei eigenständige Gestaltungen. Wähle einen — die Wahl
    wird für den nächsten Besuch gemerkt.</p>
 <div class="wahl">
   <a href="/osteomedis-vorschau/a/" data-ent="a">Entwurf A</a>
   <a href="/osteomedis-vorschau/b/" data-ent="b">Entwurf B</a>
+  <a href="/osteomedis-vorschau/c/" data-ent="c">Entwurf C</a>
 </div>
 <script>
 (function(){
   var w = null;
   try { w = localStorage.getItem("osteomedis-entwurf"); } catch(e){}
-  if (w === "a" || w === "b") location.replace("/osteomedis-vorschau/" + w + "/");
+  if (w === "a" || w === "b" || w === "c") location.replace("/osteomedis-vorschau/" + w + "/");
   Array.prototype.forEach.call(document.querySelectorAll("[data-ent]"), function(el){
     el.addEventListener("click", function(){
       try { localStorage.setItem("osteomedis-entwurf", el.dataset.ent); } catch(e){}

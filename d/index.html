@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Osteomedis · Anatomie-Prototyp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --nacht:#070B12; --elektro:#4FC3F7; --elektro-tief:#1E7FB0;
+    --text:#F3F6FA; --muted:rgba(243,246,250,.62); --line:rgba(243,246,250,.10);
+    --ff-display:'Bricolage Grotesque',Inter,system-ui,sans-serif; --ff-sans:Inter,system-ui,sans-serif;
+    --pad:clamp(1.2rem,4vw,4.5rem); --maxw:1360px;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--nacht);color:var(--text);font-family:var(--ff-sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:var(--ff-display);font-weight:800;letter-spacing:-.03em;line-height:.92}
+
+  #lade{position:fixed;inset:0 0 auto 0;height:2px;background:var(--elektro);transform-origin:left;transform:scaleX(0);z-index:50;transition:transform .2s linear,opacity .6s}
+  #lade.fertig{opacity:0}
+
+  header{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:1.1rem var(--pad);
+    background:linear-gradient(to bottom,rgba(7,11,18,.7),rgba(7,11,18,0));pointer-events:none}
+  header>*{pointer-events:auto}
+  .marke{font-family:var(--ff-display);font-weight:800;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.6rem}
+  .marke i{width:10px;height:10px;border-radius:50%;background:var(--elektro);box-shadow:0 0 18px var(--elektro)}
+  .pill{display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;padding:.8rem 1.4rem;font-weight:600;font-size:.98rem;
+    background:var(--elektro);color:var(--nacht);transition:transform .25s var(--ease),box-shadow .25s}
+  .pill:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(79,195,247,.35)}
+
+  /* ---------- Bühne ---------- */
+  #buehne{position:relative;height:760vh}
+  #buehne .kleber{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:
+    radial-gradient(70% 90% at 50% 45%,#0D1B2E 0%,#070B12 60%,#04060A 100%)}
+  #glow{position:absolute;left:50%;top:48%;width:min(120vh,80vw);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle,rgba(79,195,247,.20) 0%,rgba(79,195,247,.07) 38%,transparent 70%);filter:blur(14px);pointer-events:none}
+  #strahl{position:absolute;left:50%;top:-20%;width:38vw;height:140%;transform:translateX(-50%) rotate(8deg);pointer-events:none;
+    background:linear-gradient(to bottom,rgba(79,195,247,.10),rgba(79,195,247,0) 70%);filter:blur(40px);mix-blend-mode:screen}
+  #figur{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(110% 80% at 50% 50%,transparent 40%,rgba(4,6,10,.7) 100%),linear-gradient(to top,var(--nacht) 0%,transparent 18%)}
+  .raster{position:absolute;inset:0;pointer-events:none;opacity:.35;
+    background-image:linear-gradient(rgba(243,246,250,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(243,246,250,.05) 1px,transparent 1px);
+    background-size:80px 80px;mask-image:radial-gradient(60% 60% at 50% 50%,#000 20%,transparent 100%)}
+
+  /* Kapitel: riesige Titel, wechselnde Positionen */
+  .kapitel{position:absolute;opacity:0;visibility:hidden;transition:opacity .7s var(--ease),transform .7s var(--ease),visibility 0s .7s;pointer-events:none}
+  .kapitel.aktiv{opacity:1;visibility:visible;transition-delay:0s;pointer-events:auto}
+  .kapitel.vor{transform:translateY(60px)} .kapitel.nach{transform:translateY(-60px)}
+  .kapitel .ober{display:inline-flex;align-items:center;gap:.7rem;color:var(--elektro);font-weight:600;font-size:.9rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.2rem}
+  .kapitel .ober::before{content:"";width:34px;height:2px;background:var(--elektro)}
+  .kapitel h1,.kapitel h2{font-size:clamp(3.4rem,11vw,12rem);text-transform:uppercase;letter-spacing:-.04em}
+  .kapitel h1 em,.kapitel h2 em{font-style:normal;color:var(--elektro)}
+  .kapitel h2.klein{font-size:clamp(3rem,8.5vw,9rem)}
+  .kapitel p{color:var(--muted);font-size:clamp(1.05rem,1.5vw,1.35rem);max-width:44ch;margin-top:1.2rem}
+  .kapitel .cta{margin-top:1.8rem;display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .kapitel .adresse{color:var(--muted);font-size:.95rem}
+  /* Positionen */
+  .k0{left:var(--pad);right:var(--pad);bottom:8vh;text-align:center}
+  .k0 h1{font-size:clamp(4rem,16vw,19rem);line-height:.85}
+  .k0 .zeile{margin-top:1.4rem;color:var(--muted);letter-spacing:.22em;text-transform:uppercase;font-size:clamp(.75rem,1.1vw,1rem)}
+  .k1{left:var(--pad);top:50%;transform:translateY(-50%);max-width:min(620px,48vw)}
+  .k1.aktiv{transform:translateY(-50%)} .k1.vor{transform:translateY(calc(-50% + 60px))} .k1.nach{transform:translateY(calc(-50% - 60px))}
+  .k2{right:var(--pad);top:50%;transform:translateY(-50%);max-width:min(620px,48vw);text-align:right}
+  .k2 .ober{flex-direction:row-reverse} .k2 .ober::before{order:2}
+  .k2 p{margin-left:auto}
+  .k2.aktiv{transform:translateY(-50%)} .k2.vor{transform:translateY(calc(-50% + 60px))} .k2.nach{transform:translateY(calc(-50% - 60px))}
+  .k3{left:var(--pad);top:50%;transform:translateY(-50%);max-width:min(620px,48vw)}
+  .k3.aktiv{transform:translateY(-50%)} .k3.vor{transform:translateY(calc(-50% + 60px))} .k3.nach{transform:translateY(calc(-50% - 60px))}
+  .k4{left:var(--pad);right:var(--pad);bottom:9vh;text-align:center}
+  .k4 p{margin-inline:auto} .k4 .cta{justify-content:center}
+
+  /* Detail-Marker: kleine Anmerkungen am Körper */
+  .marker{position:absolute;display:flex;align-items:center;gap:.7rem;font-size:.85rem;letter-spacing:.06em;color:var(--text);opacity:0;transition:opacity .5s var(--ease) .15s;pointer-events:none;white-space:nowrap}
+  .marker.aktiv{opacity:1}
+  .marker i{width:9px;height:9px;border-radius:50%;background:var(--elektro);box-shadow:0 0 0 4px rgba(79,195,247,.25),0 0 18px var(--elektro);flex:none}
+  .marker b{width:64px;height:1px;background:linear-gradient(90deg,var(--elektro),rgba(79,195,247,.1));flex:none}
+  .marker.rechts{flex-direction:row-reverse} .marker.rechts b{background:linear-gradient(270deg,var(--elektro),rgba(79,195,247,.1))}
+  .marker span{background:rgba(7,11,18,.55);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:.35rem .8rem}
+
+  .hinweis{position:absolute;right:var(--pad);bottom:2rem;display:flex;align-items:center;gap:.7rem;color:var(--muted);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;transition:opacity .4s}
+  .hinweis i{width:22px;height:34px;border:1.5px solid rgba(243,246,250,.4);border-radius:12px;position:relative}
+  .hinweis i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:var(--elektro);animation:rad 1.6s ease-in-out infinite}
+  @keyframes rad{0%{transform:translateY(0);opacity:1}70%{transform:translateY(12px);opacity:0}100%{opacity:0}}
+  .schiene{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);display:flex;gap:10px}
+  .schiene b{width:6px;height:6px;border-radius:50%;background:rgba(243,246,250,.25);transition:all .4s;display:block}
+  .schiene b.aktiv{background:var(--elektro);box-shadow:0 0 14px var(--elektro);width:26px;border-radius:4px}
+
+  /* ---------- FAQ + CTA ---------- */
+  #faq{position:relative;padding:8rem var(--pad) 6rem;max-width:var(--maxw);margin:0 auto}
+  #faq .grid{display:grid;grid-template-columns:1.35fr 1fr;gap:2rem;align-items:stretch}
+  @property --x1{syntax:'<percentage>';inherits:false;initial-value:10%}
+  @property --y1{syntax:'<percentage>';inherits:false;initial-value:10%}
+  @property --x2{syntax:'<percentage>';inherits:false;initial-value:90%}
+  @property --y2{syntax:'<percentage>';inherits:false;initial-value:20%}
+  @property --x3{syntax:'<percentage>';inherits:false;initial-value:20%}
+  @property --y3{syntax:'<percentage>';inherits:false;initial-value:90%}
+  @property --x4{syntax:'<percentage>';inherits:false;initial-value:85%}
+  @property --y4{syntax:'<percentage>';inherits:false;initial-value:85%}
+  @property --s1{syntax:'<percentage>';inherits:false;initial-value:55%}
+  @property --s2{syntax:'<percentage>';inherits:false;initial-value:55%}
+  @property --s3{syntax:'<percentage>';inherits:false;initial-value:55%}
+  @property --s4{syntax:'<percentage>';inherits:false;initial-value:60%}
+  .karte{border-radius:28px;padding:clamp(2.5rem,5vw,4.5rem) clamp(1.6rem,4vw,3.5rem);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    color:var(--text);position:relative;overflow:hidden;border:1px solid rgba(79,195,247,.25);background-color:#0E2A3F;
+    background-image:
+      radial-gradient(circle at var(--x1) var(--y1),#4FC3F7 0,transparent var(--s1)),
+      radial-gradient(circle at var(--x2) var(--y2),#0B3D63 0,transparent var(--s2)),
+      radial-gradient(circle at var(--x3) var(--y3),#1E7FB0 0,transparent var(--s3)),
+      radial-gradient(circle at var(--x4) var(--y4),#070B12 0,transparent var(--s4));
+    animation:b1 9s ease-in-out infinite,b2 11s ease-in-out infinite,b3 10s ease-in-out infinite,b4 12s ease-in-out infinite,
+              g1 7s ease-in-out infinite,g2 8s ease-in-out infinite,g3 7.5s ease-in-out infinite,g4 9s ease-in-out infinite}
+  .karte::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 100%,rgba(7,11,18,.55),transparent 70%);pointer-events:none}
+  .karte>*{position:relative;z-index:1}
+  .karte .ober{color:rgba(243,246,250,.75);font-weight:600;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem}
+  .karte h2{font-size:clamp(2.2rem,4.6vw,4rem);margin-bottom:1rem;line-height:1}
+  .karte p{color:rgba(243,246,250,.78);max-width:40ch;margin-bottom:1.8rem;font-size:1.05rem}
+  .karte .pill{background:var(--text);color:var(--nacht)}
+  .karte .klein{margin-top:1.4rem;font-size:.9rem;color:rgba(243,246,250,.6)}
+  @keyframes b1{0%,100%{--x1:5%;--y1:5%}25%{--x1:45%;--y1:20%}50%{--x1:30%;--y1:60%}75%{--x1:0%;--y1:35%}}
+  @keyframes b2{0%,100%{--x2:95%;--y2:10%}33%{--x2:60%;--y2:35%}66%{--x2:80%;--y2:65%}}
+  @keyframes b3{0%,100%{--x3:10%;--y3:95%}40%{--x3:45%;--y3:65%}70%{--x3:25%;--y3:100%}}
+  @keyframes b4{0%,100%{--x4:95%;--y4:95%}30%{--x4:60%;--y4:70%}60%{--x4:100%;--y4:50%}}
+  @keyframes g1{0%,100%{--s1:45%}50%{--s1:80%}}
+  @keyframes g2{0%,100%{--s2:45%}50%{--s2:85%}}
+  @keyframes g3{0%,100%{--s3:45%}50%{--s3:78%}}
+  @keyframes g4{0%,100%{--s4:50%}50%{--s4:85%}}
+  .fragen{display:flex;flex-direction:column;justify-content:center;gap:.7rem}
+  .fragen h3{font-size:1.1rem;font-family:var(--ff-sans);font-weight:600;color:var(--muted);letter-spacing:.02em;margin-bottom:.4rem}
+  .frage{border:1px solid var(--line);border-radius:16px;background:rgba(243,246,250,.03);transition:border-color .25s,background .25s}
+  .frage summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 1.25rem;font-weight:500}
+  .frage summary::-webkit-details-marker{display:none}
+  .frage summary svg{flex:none;transition:transform .3s var(--ease);color:var(--elektro)}
+  .frage[open]{border-color:rgba(79,195,247,.4);background:rgba(79,195,247,.05)}
+  .frage[open] summary svg{transform:rotate(180deg)}
+  .frage .antwort{padding:0 1.25rem 1.2rem;color:var(--muted);font-size:.98rem}
+  footer{padding:2rem var(--pad) 3rem;max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+
+  @media (max-width:900px){
+    #faq .grid{grid-template-columns:1fr;gap:2.5rem}
+    .k1,.k2,.k3{left:var(--pad);right:var(--pad);top:auto;bottom:9vh;max-width:none;text-align:left;transform:none}
+    .k1.aktiv,.k2.aktiv,.k3.aktiv{transform:none}
+    .k2 .ober{flex-direction:row} .k2 .ober::before{order:0} .k2 p{margin-left:0}
+    .kapitel h1,.kapitel h2{font-size:clamp(3rem,15vw,5.5rem)}
+    .k0 h1{font-size:clamp(3.4rem,19vw,7rem)}
+    .marker{display:none}
+    .hinweis{display:none}
+    header .pill span{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){ .karte{animation:none} .kapitel,.marker{transition:none} }
+
+  /* Umschaltleiste der Vorschau (wird vom Generator eingesetzt) */
+  .entwahl{position:fixed;z-index:300;left:50%;translate:-50% 0;bottom:clamp(.75rem,2vh,1.5rem);display:flex;align-items:center;gap:.3rem;
+    padding:.35rem .35rem .35rem .9rem;background:#0C1620;border:1px solid #2A3A47;border-radius:999px;box-shadow:0 18px 44px -20px rgba(8,19,28,.6);
+    font-family:var(--ff-sans);font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase}
+  .entwahl .ent-l{color:#9AAAB6;margin-inline-end:.35rem}
+  .entwahl a,.entwahl .ent-ist{display:inline-block;padding:.5rem .95rem;border-radius:999px;text-decoration:none;letter-spacing:inherit}
+  .entwahl a{color:#DCE6EC;border:1px solid transparent;transition:border-color .25s,color .25s}
+  .entwahl a:hover{border-color:#5A6C7A;color:#fff}
+  .entwahl .ent-ist{background:#4FC3F7;color:#08131C;font-weight:600}
+  @media (max-width:34rem){.entwahl .ent-l{display:none}}
+  body:has(.entwahl) .schiene{bottom:4.2rem}
+</style>
+</head>
+<body>
+<div id="lade"></div>
+
+<header>
+  <a class="marke" href="#"><i></i>Osteomedis</a>
+  <a class="pill" href="#faq">Termin <span>vereinbaren</span></a>
+</header>
+
+<section id="buehne" aria-label="Der Körper als Ganzes">
+  <div class="kleber">
+    <div id="strahl"></div>
+    <div id="glow"></div>
+    <canvas id="figur" aria-hidden="true"></canvas>
+    <div class="raster"></div>
+    <div class="vignette"></div>
+
+    <!-- Kapitel: data-von / data-bis = Anteil der Scrollstrecke -->
+    <div class="kapitel k0" data-von="0" data-bis="0.16">
+      <h1>Osteo<em>medis</em></h1>
+      <div class="zeile">Osteopathie · Chiropraktik · Performance · Idstein</div>
+    </div>
+    <div class="kapitel k1" data-von="0.16" data-bis="0.38">
+      <div class="ober">Der Ansatz</div>
+      <h2 class="klein">Der Körper<br>als <em>Ganzes</em></h2>
+      <p>Wir behandeln Ursachen, nicht nur Symptome. Mit einem Plan, der zu Dir passt, nicht zu einem Schema.</p>
+    </div>
+    <div class="kapitel k2" data-von="0.38" data-bis="0.60">
+      <div class="ober">Beschwerden</div>
+      <h2 class="klein">Rücken<br>&amp; <em>Nacken</em></h2>
+      <p>Wenn Schreibtisch, Training oder Alltag sich festsetzen. Oft sitzt die Ursache nicht dort, wo es weh tut.</p>
+    </div>
+    <div class="kapitel k3" data-von="0.60" data-bis="0.82">
+      <div class="ober">Performance</div>
+      <h2 class="klein">Schneller<br><em>zurück</em></h2>
+      <p>Regeneration, Prävention und Screening für Sportler. Mit Befund statt Bauchgefühl, abgestimmt auf Deinen Trainingszyklus.</p>
+    </div>
+    <div class="kapitel k4" data-von="0.82" data-bis="1.01">
+      <div class="ober">Elf Methoden</div>
+      <h2 class="klein">Ein Körper. Ein <em>Plan.</em></h2>
+      <p>Osteopathie, Chiropraktik, Dry Needling, Stoßwelle, Infusionen. Was Du bekommst, entscheidet der Befund.</p>
+      <div class="cta"><a class="pill" href="#faq">Termin vereinbaren</a><span class="adresse">Grunerstraße 33 · 65510 Idstein</span></div>
+    </div>
+
+    <!-- Detail-Marker (Position in % des Bildschirms, Zeitfenster in Scroll-Anteilen) -->
+    <div class="marker" data-von="0.05" data-bis="0.16" style="left:56%;top:44%"><i></i><b></b><span>Kiefergelenk · CMD</span></div>
+    <div class="marker rechts" data-von="0.08" data-bis="0.18" style="right:56%;top:70%"><i></i><b></b><span>Halswirbelsäule</span></div>
+    <div class="marker" data-von="0.24" data-bis="0.38" style="left:55%;top:40%"><i></i><b></b><span>Schultergürtel</span></div>
+    <div class="marker rechts" data-von="0.28" data-bis="0.40" style="right:55%;top:58%"><i></i><b></b><span>Brustwirbelsäule</span></div>
+    <div class="marker rechts" data-von="0.46" data-bis="0.60" style="right:52%;top:80%"><i></i><b></b><span>Lendenwirbelsäule</span></div>
+    <div class="marker" data-von="0.66" data-bis="0.82" style="left:53%;top:84%"><i></i><b></b><span>Knie · Sprunggelenk</span></div>
+
+    <div class="hinweis" id="hinweis"><i></i>Scrollen</div>
+    <div class="schiene" id="schiene"><b class="aktiv"></b><b></b><b></b><b></b><b></b></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="grid">
+    <div class="karte">
+      <div class="ober">Nächster Schritt</div>
+      <h2>Termin in<br>Idstein sichern</h2>
+      <p>Freie Zeiten siehst Du direkt in der Online-Buchung. Für akute Beschwerden halten wir Plätze in der laufenden Woche frei.</p>
+      <a class="pill" href="#">Freie Termine ansehen</a>
+      <div class="klein">Mo bis Fr 10 bis 19 Uhr · 0157 555 363 57 · Keine Überweisung nötig</div>
+    </div>
+    <div class="fragen">
+      <h3>Häufige Fragen</h3>
+      <details class="frage" open><summary>Wie viele Termine brauche ich?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><div class="antwort">Das hängt vom Befund ab. Bei akuten Beschwerden spürst Du oft schon nach der ersten Behandlung eine Veränderung. Chronische Themen brauchen meist drei bis sechs Termine im Abstand von ein bis zwei Wochen.</div></details>
+      <details class="frage"><summary>Ist die Behandlung schmerzhaft?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><div class="antwort">In der Regel nicht. Osteopathie arbeitet mit sanftem Druck. Bei sehr gereiztem Gewebe kann einzelnes Lösen kurz ziehen, das sprechen wir vorher ab.</div></details>
+      <details class="frage"><summary>Muss ich vorher zum Arzt?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><div class="antwort">Nein, eine Überweisung ist nicht nötig. Bei plötzlich auftretenden, sehr starken Beschwerden mit Ausfallerscheinungen gehört der erste Weg trotzdem zum Arzt.</div></details>
+      <details class="frage"><summary>Kann ich am selben Tag noch trainieren?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><div class="antwort">Nach einer reinen Regenerationsbehandlung meistens ja, allerdings eher locker. Nach einer Korrektur an Gelenken oder Wirbelsäule lieber einen Tag Pause.</div></details>
+      <details class="frage"><summary>Übernimmt das die Krankenkasse?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><div class="antwort">Viele gesetzliche Kassen bezuschussen Osteopathie, private Kassen und Zusatzversicherungen erstatten häufig vollständig. Du bekommst eine Rechnung nach der Gebührenordnung für Heilpraktiker.</div></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Osteomedis · Praxis für Osteopathie und Chiropraktik · Idstein</span>
+  <span>Prototyp, nicht öffentlich · NEXAS Media</span>
+</footer>
+
+<script>
+(function(){
+  const FRAMES = 160;                       // Bilder der Kamerafahrt in frames/
+  const PFAD = i => `frames/f_${String(i).padStart(3,'0')}.webp`;
+  const KAPITEL = [...document.querySelectorAll('.kapitel')];
+  const MARKER = [...document.querySelectorAll('.marker')];
+  const PUNKTE = document.querySelectorAll('#schiene b');
+  const buehne = document.getElementById('buehne');
+  const canvas = document.getElementById('figur');
+  const ctx = canvas.getContext('2d', {alpha:true});
+  const lade = document.getElementById('lade');
+  const hinweis = document.getElementById('hinweis');
+  const reduziert = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bilder = new Array(FRAMES);
+  let geladen = 0, dpr = 1, W = 0, H = 0, ziel = 0, ist = 0, letzterFrame = -1, letztesKapitel = -1;
+
+  function groesse(){
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    letzterFrame = -1; zeichne();
+  }
+  function zeichne(){
+    const idx = Math.round(ist);
+    const img = bilder[idx] || bilder[0];
+    if(!img || idx === letzterFrame) return;
+    letzterFrame = idx;
+    ctx.clearRect(0,0,W,H);
+    // cover: Bild füllt den Bildschirm, Figur bleibt mittig
+    const s = Math.max(W/img.naturalWidth, H/img.naturalHeight);
+    const zw = img.naturalWidth*s, zh = img.naturalHeight*s;
+    ctx.drawImage(img, (W-zw)/2, (H-zh)/2, zw, zh);
+  }
+  function ladeBild(i){
+    return new Promise(res=>{
+      const im = new Image();
+      im.onload = ()=>{ bilder[i]=im; geladen++; lade.style.transform=`scaleX(${geladen/FRAMES})`; if(geladen===FRAMES) lade.classList.add('fertig'); if(i===0){letzterFrame=-1; zeichne();} res(); };
+      im.onerror = ()=>{ geladen++; res(); };
+      im.src = PFAD(i);
+    });
+  }
+  async function ladeAlle(){
+    await ladeBild(0);
+    const reihenfolge = [];
+    for(let s=8; s>=1; s=s/2) for(let i=0;i<FRAMES;i+=s) if(!reihenfolge.includes(i) && i!==0) reihenfolge.push(i);
+    let p=0; const arbeiter = Array.from({length:6}, async()=>{ while(p<reihenfolge.length){ const i=reihenfolge[p++]; await ladeBild(i);} });
+    await Promise.all(arbeiter);
+    letzterFrame=-1; zeichne();
+  }
+  function fortschritt(){
+    const r = buehne.getBoundingClientRect();
+    return Math.min(1, Math.max(0, -r.top / (r.height - innerHeight)));
+  }
+  function fenster(el,p){ return p >= +el.dataset.von && p < +el.dataset.bis; }
+  function kapitelSetzen(p){
+    let k = KAPITEL.findIndex(el=>fenster(el,p)); if(k<0) k = p>=1 ? KAPITEL.length-1 : 0;
+    if(k !== letztesKapitel){
+      letztesKapitel = k;
+      KAPITEL.forEach((el,i)=>{ el.classList.toggle('aktiv', i===k); el.classList.toggle('vor', i>k); el.classList.toggle('nach', i<k); });
+      PUNKTE.forEach((b,i)=>b.classList.toggle('aktiv', i===k));
+      hinweis.style.opacity = k===0 ? 1 : 0;
+    }
+    MARKER.forEach(m=>m.classList.toggle('aktiv', fenster(m,p)));
+  }
+  function tick(){
+    const p = fortschritt();
+    ziel = p * (FRAMES-1);
+    ist = reduziert ? ziel : ist + (ziel-ist)*0.16;   // sanftes Nachziehen
+    zeichne(); kapitelSetzen(p);
+    requestAnimationFrame(tick);
+  }
+  addEventListener('resize', groesse, {passive:true});
+  groesse(); ladeAlle(); requestAnimationFrame(tick);
+})();
+</script>
+<div class="entwahl" role="group" aria-label="Designentwurf wechseln"><span class="ent-l">Entwurf</span><a href="/osteomedis-vorschau/a/" rel="nofollow" data-ent="a">Entwurf A</a><a href="/osteomedis-vorschau/b/" rel="nofollow" data-ent="b">Entwurf B</a><a href="/osteomedis-vorschau/c/" rel="nofollow" data-ent="c">Entwurf C</a><span class="ent-ist" aria-current="true">Entwurf D</span></div>
+</body>
+</html>

@@ -269,13 +269,25 @@
     W = canvas.clientWidth; H = canvas.clientHeight;
     canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
     ctx.setTransform(dpr,0,0,dpr,0,0);
-    letzterFrame = -1; zeichne();
+    letztesBild = null; letzterFrame = -1; zeichne();
   }
+  // Solange nicht alle Bilder da sind, das nächstgelegene geladene Bild
+  // nehmen. Vorher fiel jedes fehlende Bild auf Bild 0 zurück, dadurch
+  // sprang die Figur beim Scrollen ständig in die Ausgangspose (Flackern).
+  function naechstesBild(idx){
+    if(bilder[idx]) return bilder[idx];
+    for(let d=1; d<FRAMES; d++){
+      if(bilder[idx-d]) return bilder[idx-d];
+      if(bilder[idx+d]) return bilder[idx+d];
+    }
+    return null;
+  }
+  let letztesBild = null;
   function zeichne(){
     const idx = Math.round(ist);
-    const img = bilder[idx] || bilder[0];
-    if(!img || idx === letzterFrame) return;
-    letzterFrame = idx;
+    const img = naechstesBild(idx);
+    if(!img || img === letztesBild) return;
+    letztesBild = img; letzterFrame = idx;
     ctx.clearRect(0,0,W,H);
     // cover: Bild füllt den Bildschirm, Figur bleibt mittig
     const s = Math.max(W/img.naturalWidth, H/img.naturalHeight);
@@ -285,7 +297,7 @@
   function ladeBild(i){
     return new Promise(res=>{
       const im = new Image();
-      im.onload = ()=>{ bilder[i]=im; geladen++; lade.style.transform=`scaleX(${geladen/FRAMES})`; if(geladen===FRAMES) lade.classList.add('fertig'); if(i===0){letzterFrame=-1; zeichne();} res(); };
+      im.onload = ()=>{ bilder[i]=im; geladen++; lade.style.transform=`scaleX(${geladen/FRAMES})`; if(geladen===FRAMES) lade.classList.add('fertig'); letztesBild=null; letzterFrame=-1; zeichne(); res(); };
       im.onerror = ()=>{ geladen++; res(); };
       im.src = PFAD(i);
     });
@@ -296,7 +308,7 @@
     for(let s=8; s>=1; s=s/2) for(let i=0;i<FRAMES;i+=s) if(!reihenfolge.includes(i) && i!==0) reihenfolge.push(i);
     let p=0; const arbeiter = Array.from({length:6}, async()=>{ while(p<reihenfolge.length){ const i=reihenfolge[p++]; await ladeBild(i);} });
     await Promise.all(arbeiter);
-    letzterFrame=-1; zeichne();
+    letztesBild=null; letzterFrame=-1; zeichne();
   }
   function fortschritt(){
     const r = buehne.getBoundingClientRect();

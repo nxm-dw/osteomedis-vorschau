@@ -16,6 +16,7 @@
 <meta name="theme-color" content="#EEF3F6">
 <link rel="preload" href="/osteomedis-vorschau/assets/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/osteomedis-vorschau/assets/osteomedis.css">
+<script>window.OSTEO_TERMIN={"token": "", "beispiel": true};</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["MedicalBusiness","LocalBusiness"],"@id":"https://osteomedis.de/#praxis","name":"Osteomedis","alternateName":"Praxis Paul Seeger","url":"https://osteomedis.de/","telephone":"+4915755536357","email":"praxis@osteomedis.de","image":"https://osteomedis.de/assets/paul-seeger.webp","priceRange":"100–155 €","medicalSpecialty":"Osteopathic","address":{"@type":"PostalAddress","streetAddress":"Kesselbacher Weg 19","postalCode":"65510","addressLocality":"Idstein","addressRegion":"Hessen","addressCountry":"DE"},"geo":{"@type":"GeoCoordinates","latitude":"50.2233","longitude":"8.2661"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"19:00"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"183","bestRating":"5"},"employee":{"@id":"https://osteomedis.de/#paul"},"areaServed":[{"@type":"City","name":"Idstein"},{"@type":"AdministrativeArea","name":"Rheingau-Taunus-Kreis"}]},{"@type":"Physician","@id":"https://osteomedis.de/#paul","name":"Paul Seeger","jobTitle":"Osteopath, Heilpraktiker und Chiropraktiker","url":"https://osteomedis.de/praxis/","image":"https://osteomedis.de/assets/paul-seeger.webp","worksFor":{"@id":"https://osteomedis.de/#praxis"},"hasCredential":[{"@type":"EducationalOccupationalCredential","credentialCategory":"Osteopathie","name":"Fünfjähriges Vollzeitstudium am German College of Osteopathic Medicine"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Heilkunde","name":"Offizielle Erlaubnis zur Ausübung der Heilkunde"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Chiropraktik","name":"Ausbildung unter Dr. Giovanni Bonfanti"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Fitness","name":"BSA-Lizenzen Fitness, präventives Rückentraining, Gesundheit und Sport"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Ernährung","name":"BSA-Lizenzen Ernährungs- und Sporternährungsberatung"},{"@type":"EducationalOccupationalCredential","credentialCategory":"Universitär","name":"Hospitanz an der Johannes Gutenberg-Universität Mainz"}]},{"@type":"MedicalWebPage","@id":"https://osteomedis.de/leistungen/stosswellentherapie/#page","url":"https://osteomedis.de/leistungen/stosswellentherapie/","name":"Stoßwellentherapie in Idstein — Praxis Osteomedis","description":"Stoßwellentherapie bei Tennisellenbogen, Fersensporn und Kalkschulter in Idstein. Nicht-invasiv, 15 bis 30 Minuten je Sitzung.","inLanguage":"de-DE","mainEntity":{"@id":"https://osteomedis.de/leistungen/stosswellentherapie/#service"}},{"@type":"Service","@id":"https://osteomedis.de/leistungen/stosswellentherapie/#service","name":"Stoßwellentherapie","serviceType":"Stoßwellentherapie","provider":{"@id":"https://osteomedis.de/#praxis"},"areaServed":{"@type":"City","name":"Idstein"},"description":"Hochenergetische Schallwellen regen gezielt Heilungsprozesse an und lindern Schmerz. Ursprünglich zur Zertrümmerung von Nierensteinen entwickelt, heute fester Bestandteil der Orthopädie. 15 bis 30 Minuten, 100 Euro."},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Start","item":"https://osteomedis.de/"},{"@type":"ListItem","position":2,"name":"Leistungen","item":"https://osteomedis.de/leistungen/"},{"@type":"ListItem","position":3,"name":"Stoßwellentherapie","item":"https://osteomedis.de/leistungen/stosswellentherapie/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Was kostet Stoßwellentherapie?","acceptedAnswer":{"@type":"Answer","text":"Die Behandlung dauert 15–30 Min und kostet 100 €. Abgerechnet wird nach der Gebührenordnung für Heilpraktiker; viele Kassen erstatten anteilig."}},{"@type":"Question","name":"Brauche ich eine Überweisung?","acceptedAnswer":{"@type":"Answer","text":"Nein. Als Heilpraktiker darf Paul Seeger ohne ärztliche Überweisung und ohne Rezept behandeln. Du buchst direkt einen Termin."}}]}]}</script>
 </head>
 <body class="w-therapy stage">
@@ -28,7 +29,7 @@
           <img class="logo-mark logo-paul" src="/osteomedis-vorschau/assets/paul-logo-farbe.svg" width="40" height="35" alt="" aria-hidden="true">
           <span class="logo-type"><b>Osteomedis</b><i>Osteopathie · Performance</i></span>
         </a>
-        <ul class="navlinks"><span class="navhi" aria-hidden="true"></span>
+        <ul class="navlinks" id="navlinks"><span class="navhi" aria-hidden="true"></span>
           <li><a href="/osteomedis-vorschau/a/#beschwerden">Beschwerden</a></li>
           <li><a href="/osteomedis-vorschau/a/leistungen/">Leistungen</a></li>
           <li><a href="/osteomedis-vorschau/a/#profis">Für Profis</a></li>
@@ -36,6 +37,7 @@
           <li><a href="/osteomedis-vorschau/a/preise/">Preise</a></li>
           <li><a href="/osteomedis-vorschau/a/praxis/">Praxis</a></li>
         </ul>
+        <button class="navtoggle" type="button" id="navToggle" aria-expanded="false" aria-controls="navlinks" data-cursor><span class="navtoggle-ico" aria-hidden="true"></span><span class="sr">Menü öffnen</span></button>
         <button class="btn js-book" data-cursor>Termin buchen</button>
       </div>
     </div>
@@ -63,7 +65,7 @@
           <p class="eyebrow">Auf einen Blick</p>
           <dl><div><dt>Dauer</dt><dd>15–30 Min</dd></div><div><dt>Kosten</dt><dd><span class="em">100 €</span></dd></div><div><dt>Überweisung</dt><dd>nicht nötig</dd></div><div><dt>Erstattung</dt><dd>viele Kassen anteilig</dd></div></dl>
           <button class="btn js-book" data-topic="beschwerden" data-cursor>Termin buchen <span class="arw">→</span></button>
-          <p class="next"><span class="pulse"></span>
+          <p class="next" data-termin><span class="pulse"></span>
             <span>Nächster Termin</span><b id="nextSlotShort">–</b></p>
         </aside>
       </div>

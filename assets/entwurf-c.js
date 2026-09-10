@@ -6,6 +6,50 @@ var FINE = matchMedia("(pointer:fine)").matches;
 var $  = function(s,r){ return (r||document).querySelector(s); };
 var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
 var clamp = function(v,a,b){ return v<a?a:(v>b?b:v); };
+
+(function(){
+var leiste = document.querySelector(".snav .navbar");
+if (!leiste) return;
+var messen = function(){
+document.documentElement.style.setProperty("--navh",
+Math.round(leiste.getBoundingClientRect().height) + "px");
+};
+messen();
+if (window.ResizeObserver) new ResizeObserver(messen).observe(leiste);
+else addEventListener("resize", messen);
+addEventListener("load", messen);
+})();
+
+(function(){
+var knopf = document.getElementById("navToggle"),
+feld  = document.getElementById("navlinks");
+if (!knopf || !feld) return;
+document.documentElement.classList.add("js-nav");
+function setzen(offen){
+feld.classList.toggle("offen", offen);
+knopf.setAttribute("aria-expanded", offen ? "true" : "false");
+var t = knopf.querySelector(".sr");
+if (t) t.textContent = offen ? "Menü schließen" : "Menü öffnen";
+}
+knopf.addEventListener("click", function(){
+setzen(knopf.getAttribute("aria-expanded") !== "true");
+});
+feld.addEventListener("click", function(e){
+if (e.target.closest("a")) setzen(false);
+});
+document.addEventListener("keydown", function(e){
+if (e.key === "Escape" && knopf.getAttribute("aria-expanded") === "true"){
+setzen(false); knopf.focus();
+}
+});
+document.addEventListener("click", function(e){
+if (knopf.getAttribute("aria-expanded") !== "true") return;
+if (!e.target.closest(".navbar")) setzen(false);
+});
+addEventListener("resize", function(){
+if (innerWidth >= 768 && knopf.getAttribute("aria-expanded") === "true") setzen(false);
+});
+})();
 var tickFns = [];
 (function tick(){ for (var i=0;i<tickFns.length;i++) tickFns[i](); requestAnimationFrame(tick); })();
 
@@ -493,18 +537,56 @@ var seed=(d.getDate()*7 + i*13) % 11;
 return TIMES.filter(function(x,j){ return (seed+j*5)%7 !== 0; })
 .map(function(x,j){ return {time:x, free:((seed+j*3)%5)!==0}; });
 }
+
+var TQ = window.OSTEO_TERMIN || {token:"", beispiel:false};
 var DAYS = workdays(10), firstFree=null;
 for (var fi=0; fi<DAYS.length && !firstFree; fi++){
 var fs = slotsFor(DAYS[fi],fi).filter(function(s){return s.free;});
 if (fs.length) firstFree = {d:DAYS[fi], t:fs[0].time};
 }
-if (firstFree){
-var txt = DOWL[firstFree.d.getDay()]+", "+firstFree.d.getDate()+". "+
-MONL[firstFree.d.getMonth()]+" · "+firstFree.t+" Uhr";
-["#nextSlot","#nextSlotInf"].forEach(function(s){ if ($(s)) $(s).textContent = txt; });
-var kurz = DOW[firstFree.d.getDay()]+", "+String(firstFree.d.getDate()).padStart(2,"0")+"."+
-String(firstFree.d.getMonth()+1).padStart(2,"0")+". · "+firstFree.t;
+function slotSchreiben(d, t){
+var lang = DOWL[d.getDay()]+", "+d.getDate()+". "+MONL[d.getMonth()]+" · "+t+" Uhr";
+["#nextSlot","#nextSlotInf"].forEach(function(s){ if ($(s)) $(s).textContent = lang; });
+var kurz = DOW[d.getDay()]+", "+String(d.getDate()).padStart(2,"0")+"."+
+String(d.getMonth()+1).padStart(2,"0")+". · "+t;
 if ($("#nextSlotShort")) $("#nextSlotShort").textContent = kurz;
+}
+function terminAnzeigeAus(){
+$$("[data-termin]").forEach(function(el){ el.hidden = true; });
+}
+function beispielKennzeichnen(){
+$$("[data-termin]").forEach(function(el){
+if (el.querySelector(".termin-beispiel")) return;
+var m = document.createElement("span");
+m.className = "termin-beispiel";
+m.textContent = "Beispielzeit — Buchung noch nicht angebunden";
+el.appendChild(m);
+});
+}
+
+function teaserHolen(token){
+return fetch("https://my.lemniscus.de/mvc/pss/teaser?token=" + encodeURIComponent(token),
+{mode:"cors", credentials:"omit"})
+.then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+.then(function(j){
+var liste = j && (j.slots || j.termine || j.appointments || (Array.isArray(j) ? j : null));
+if (!liste || !liste.length) throw new Error("keine Zeiten");
+var erst = liste[0];
+var d = new Date(erst.start || erst.datum || erst.date || erst);
+if (isNaN(d)) throw new Error("Datum unlesbar");
+var t = String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+slotSchreiben(d, t);
+});
+}
+if (TQ.token){
+teaserHolen(TQ.token).catch(function(){
+terminAnzeigeAus();
+});
+} else if (TQ.beispiel){
+if (firstFree) slotSchreiben(firstFree.d, firstFree.t);
+beispielKennzeichnen();
+} else {
+terminAnzeigeAus();
 }
 var SERVICES = {
 beschwerden:[
@@ -600,6 +682,15 @@ list.appendChild(b);
 }
 function renderDays(){
 var wrap = $("#bkDays"); wrap.innerHTML="";
+if (!TQ.token && !TQ.beispiel){
+var hin = document.createElement("p");
+hin.className = "bk-hinweis";
+hin.textContent = "Die Online-Buchung wird gerade angebunden. Ruf bitte kurz an, "
++ "dann finden wir sofort einen Termin.";
+wrap.appendChild(hin);
+var sl = $("#bkSlots"); if (sl) sl.innerHTML = "";
+return;
+}
 DAYS.forEach(function(d,i){
 var b=document.createElement("button");
 b.className="day"; b.type="button";
@@ -613,7 +704,8 @@ st.day=d; st.time=null; renderSlots(d,i);
 });
 wrap.appendChild(b);
 });
-wrap.querySelector(".day").click();
+var ersterTag = wrap.querySelector(".day");
+if (ersterTag) ersterTag.click();
 }
 function renderSlots(d,i){
 var wrap=$("#bkSlots"); wrap.innerHTML="";

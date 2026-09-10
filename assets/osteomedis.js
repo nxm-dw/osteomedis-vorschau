@@ -10,6 +10,14 @@ var tickFns = [];
 (function tick(){ for (var i=0;i<tickFns.length;i++) tickFns[i](); requestAnimationFrame(tick); })();
 
 var PAL = {rgb:"217,179,108", rgb2:"242,220,169", bg:"10,14,20"};
+
+(function(){
+try {
+var cs = getComputedStyle(document.body);
+var r = cs.getPropertyValue("--inf-rgb").trim(), r2 = cs.getPropertyValue("--inf-rgb-2").trim();
+if (r) PAL.rgb = r; if (r2) PAL.rgb2 = r2;
+} catch(e){}
+})();
 function hexToRgb(x){
 x = String(x).trim().replace("#","");
 if (x.length === 3) x = x[0]+x[0]+x[1]+x[1]+x[2]+x[2];

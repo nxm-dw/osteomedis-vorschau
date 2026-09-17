@@ -559,7 +559,7 @@ $$("[data-termin]").forEach(function(el){
 if (el.querySelector(".termin-beispiel")) return;
 var m = document.createElement("span");
 m.className = "termin-beispiel";
-m.textContent = "Beispielzeit — Buchung noch nicht angebunden";
+m.textContent = "Beispielzeit · Buchung folgt";
 el.appendChild(m);
 });
 }

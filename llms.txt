@@ -11,17 +11,17 @@
 - [Leistung & Prävention](https://osteomedis.de/performance/leistung-praevention/): Dysbalancen finden, bevor sie wehtun
 
 ## Behandlungsmethoden
-- [Osteopathie](https://osteomedis.de/leistungen/osteopathie/): 50–60 Min, 145–155 €
-- [Chiropraktik](https://osteomedis.de/leistungen/chiropraktik/): 50 Min, 145 €
-- [Stoßwellentherapie](https://osteomedis.de/leistungen/stosswellentherapie/): 15–30 Min, 100 €
-- [Hochenergie-Induktionstherapie](https://osteomedis.de/leistungen/hochenergie-induktionstherapie/): 10–20 Min, 100 €
-- [Akupunktur](https://osteomedis.de/leistungen/akupunktur/): 30–45 Min, auf Anfrage
-- [Dry Needling](https://osteomedis.de/leistungen/dry-needling/): 30 Min, 100 €
-- [Myofasziale Lösetechniken](https://osteomedis.de/leistungen/myofasziale-loesetechniken/): 30–50 Min, 145 €
-- [Triggerpunkt-Therapie](https://osteomedis.de/leistungen/triggerpunkt-therapie/): 30 Min, 100 €
-- [Elektrotherapie & Ultraschall](https://osteomedis.de/leistungen/elektrotherapie-ultraschall/): 15–20 Min, auf Anfrage
-- [Schröpfen](https://osteomedis.de/leistungen/schroepfen/): 20–30 Min, auf Anfrage
-- [Kieferbehandlung bei CMD](https://osteomedis.de/leistungen/kieferbehandlung-cmd/): 50 Min, 145 €
+- [Osteopathie](https://osteomedis.de/leistungen/osteopathie/): 50–60 Min, im Termin enthalten
+- [Chiropraktik](https://osteomedis.de/leistungen/chiropraktik/): 50 Min, im Termin enthalten
+- [Stoßwellentherapie](https://osteomedis.de/leistungen/stosswellentherapie/): 15–30 Min, im Termin enthalten
+- [Hochenergie-Induktionstherapie](https://osteomedis.de/leistungen/hochenergie-induktionstherapie/): 10–20 Min, im Termin enthalten
+- [Akupunktur](https://osteomedis.de/leistungen/akupunktur/): 30–45 Min, im Termin enthalten
+- [Dry Needling](https://osteomedis.de/leistungen/dry-needling/): 30 Min, im Termin enthalten
+- [Myofasziale Lösetechniken](https://osteomedis.de/leistungen/myofasziale-loesetechniken/): 30–50 Min, im Termin enthalten
+- [Triggerpunkt-Therapie](https://osteomedis.de/leistungen/triggerpunkt-therapie/): 30 Min, im Termin enthalten
+- [Elektrotherapie & Ultraschall](https://osteomedis.de/leistungen/elektrotherapie-ultraschall/): 15–20 Min, im Termin enthalten
+- [Schröpfen](https://osteomedis.de/leistungen/schroepfen/): 20–30 Min, im Termin enthalten
+- [Kieferbehandlung bei CMD](https://osteomedis.de/leistungen/kieferbehandlung-cmd/): 50 Min, im Termin enthalten
 
 ## Weitere Seiten
 - [Infusionen](https://osteomedis.de/infusionen/)

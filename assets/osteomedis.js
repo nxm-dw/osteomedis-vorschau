@@ -69,7 +69,8 @@ var v = parseInt(x,16);
 return ((v>>16)&255)+","+((v>>8)&255)+","+(v&255);
 }
 (function(){
-var cs = getComputedStyle(document.documentElement);
+
+var cs = getComputedStyle(document.body);
 var a = cs.getPropertyValue("--inf-rgb").trim(), b = cs.getPropertyValue("--inf-rgb-2").trim();
 if (a) PAL.rgb = a;
 if (b) PAL.rgb2 = b;
@@ -613,7 +614,8 @@ var bk = $("#booking");
 if (bk){
 var st = {step:1,intent:null,svc:null,day:null,time:null}, lastFocus=null;
 function setWorld(w){
-bk.classList.toggle("w-infusion", w==="infusion");
+
+bk.classList.remove("w-infusion");
 bk.classList.toggle("w-therapy", w!=="infusion");
 $("#bkWorld").textContent = w==="infusion" ? "Infusion · Terminbuchung" : "Terminbuchung";
 }

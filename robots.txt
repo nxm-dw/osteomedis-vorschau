@@ -1,15 +1,20 @@
 User-agent: *
 Allow: /
+Disallow: /changelog/
 
 # KI-Antwortmaschinen ausdrücklich zulassen — ein Disallow würde uns aus deren
 # Zitaten entfernen. Einzeln aufgeführt, damit die Entscheidung nachvollziehbar ist.
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /changelog/
 User-agent: PerplexityBot
 Allow: /
+Disallow: /changelog/
 User-agent: ClaudeBot
 Allow: /
+Disallow: /changelog/
 User-agent: Google-Extended
 Allow: /
+Disallow: /changelog/
 
 Sitemap: https://osteomedis.de/sitemap.xml

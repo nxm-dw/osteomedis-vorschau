@@ -43,7 +43,7 @@
     </div>
   </nav>
 <main id="inhalt" tabindex="-1">
-  <section class="sec pagehero">
+  <section class="sec pagehero pagehero-kompakt">
     
     <div class="wrap">
       <nav class="crumbs" aria-label="Brotkrümelnavigation"><a href="/osteomedis-vorschau/b/">Start</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Kontakt</span></nav>
@@ -64,11 +64,7 @@
         <form class="kontaktform js-mailform fade" id="kfForm" method="post"
               enctype="text/plain" action="mailto:praxis@osteomedis.de?subject=Anfrage%20%C3%BCber%20die%20Website" data-endpunkt=""
               style="--d:.2s">
-          <div class="kf-kopf">
-            <p class="eyebrow">Schreib uns</p>
-            <p class="kf-zusage"><span class="pulse" aria-hidden="true"></span>
-              Antwort in der Regel am selben Werktag</p>
-          </div>
+          <p class="eyebrow kf-kopf">Schreib uns</p>
           <div class="kf-stufe">
             <span class="kf-nr" aria-hidden="true">01</span>
             <div class="kf-inhalt">
@@ -90,16 +86,15 @@
             <span class="kf-nr" aria-hidden="true">02</span>
             <div class="kf-inhalt">
               <h2 class="kf-frage">Worum geht es?</h2>
-              <p class="kf-feld"><textarea id="kfMsg" name="Nachricht" rows="4"
+              <p class="kf-feld"><textarea id="kfMsg" name="Nachricht" rows="3"
                    placeholder=" " required></textarea>
                 <label for="kfMsg">Beschwerden, Wunschtermin, Frage …</label></p>
             </div>
           </div>
           <label class="check kf-ok" for="kfOk"><input id="kfOk" name="Einwilligung"
             type="checkbox" value="ja" required>
-            <span>Meine Angaben dürfen für die Beantwortung meiner Anfrage gespeichert
-              und verwendet werden. Mehr dazu in der
-              <a href="/osteomedis-vorschau/b/datenschutz/">Datenschutzerklärung</a>.</span></label>
+            <span>Meine Angaben dürfen zur Beantwortung verwendet werden —
+              <a href="/osteomedis-vorschau/b/datenschutz/">Datenschutz</a>.</span></label>
           <button class="btn kf-senden" type="submit" data-cursor>Nachricht senden
             <span class="arw">&#8594;</span></button>
           <p class="rr-status" id="kfStatus" role="status" aria-live="polite"></p>

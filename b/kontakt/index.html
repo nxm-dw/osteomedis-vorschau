@@ -61,28 +61,46 @@
             <a class="ln-link" href="/osteomedis-vorschau/b/preise/">Preise und Erstattung →</a>
           </div>
         </div>
-        <form class="rr-form kontaktform js-mailform fade" id="kfForm" method="post"
+        <form class="kontaktform js-mailform fade" id="kfForm" method="post"
               enctype="text/plain" action="mailto:praxis@osteomedis.de?subject=Anfrage%20%C3%BCber%20die%20Website" data-endpunkt=""
               style="--d:.2s">
-          <p class="eyebrow">Schreib uns</p>
-          <div class="fields">
-            <div class="field"><label for="kfName">Name</label>
-              <input id="kfName" name="Name" type="text" autocomplete="name" required></div>
-            <div class="field"><label for="kfTel">Telefon (optional)</label>
-              <input id="kfTel" name="Telefon" type="tel" autocomplete="tel"></div>
-            <div class="field wide"><label for="kfMail">E-Mail</label>
-              <input id="kfMail" name="E-Mail" type="email" autocomplete="email" required></div>
-            <div class="field wide"><label for="kfMsg">Dein Anliegen</label>
-              <textarea id="kfMsg" name="Nachricht" rows="4" required></textarea></div>
-            <div class="field wide">
-              <label class="check" for="kfOk"><input id="kfOk" name="Einwilligung"
-                type="checkbox" value="ja" required>
-                <span>Meine Angaben dürfen für die Beantwortung meiner Anfrage gespeichert
-                  und verwendet werden. Mehr dazu in der
-                  <a href="/osteomedis-vorschau/b/datenschutz/">Datenschutzerklärung</a>.</span></label>
+          <div class="kf-kopf">
+            <p class="eyebrow">Schreib uns</p>
+            <p class="kf-zusage"><span class="pulse" aria-hidden="true"></span>
+              Antwort in der Regel am selben Werktag</p>
+          </div>
+          <div class="kf-stufe">
+            <span class="kf-nr" aria-hidden="true">01</span>
+            <div class="kf-inhalt">
+              <h2 class="kf-frage">Wer schreibt uns?</h2>
+              <div class="kf-felder">
+                <p class="kf-feld"><input id="kfName" name="Name" type="text"
+                     autocomplete="name" placeholder=" " required>
+                  <label for="kfName">Name</label></p>
+                <p class="kf-feld"><input id="kfTel" name="Telefon" type="tel"
+                     autocomplete="tel" placeholder=" ">
+                  <label for="kfTel">Telefon (optional)</label></p>
+                <p class="kf-feld breit"><input id="kfMail" name="E-Mail" type="email"
+                     autocomplete="email" placeholder=" " required>
+                  <label for="kfMail">E-Mail</label></p>
+              </div>
             </div>
           </div>
-          <button class="btn" type="submit" data-cursor>Nachricht senden
+          <div class="kf-stufe">
+            <span class="kf-nr" aria-hidden="true">02</span>
+            <div class="kf-inhalt">
+              <h2 class="kf-frage">Worum geht es?</h2>
+              <p class="kf-feld"><textarea id="kfMsg" name="Nachricht" rows="4"
+                   placeholder=" " required></textarea>
+                <label for="kfMsg">Beschwerden, Wunschtermin, Frage …</label></p>
+            </div>
+          </div>
+          <label class="check kf-ok" for="kfOk"><input id="kfOk" name="Einwilligung"
+            type="checkbox" value="ja" required>
+            <span>Meine Angaben dürfen für die Beantwortung meiner Anfrage gespeichert
+              und verwendet werden. Mehr dazu in der
+              <a href="/osteomedis-vorschau/b/datenschutz/">Datenschutzerklärung</a>.</span></label>
+          <button class="btn kf-senden" type="submit" data-cursor>Nachricht senden
             <span class="arw">&#8594;</span></button>
           <p class="rr-status" id="kfStatus" role="status" aria-live="polite"></p>
         </form>

@@ -889,26 +889,25 @@ if (!feld.form.contains(e.target)) zeichne([]);
 });
 })();
 
-(function () {
-var form = $("#rrForm");
-if (!form || form.dataset.endpunkt) return;   // echter Endpunkt: normal abschicken
-var status = $("#rrStatus");
+$$(".js-mailform").forEach(function (form) {
+if (form.dataset.endpunkt) return;          // echter Endpunkt: normal abschicken
+var status = form.querySelector(".rr-status");
 form.addEventListener("submit", function (e) {
-if (!form.checkValidity()) return;          // der Browser meldet die Lücke selbst
+if (!form.checkValidity()) return;        // der Browser meldet die Lücke selbst
 e.preventDefault();
-var wert = function (id) { return ($(id) && $(id).value || "").trim(); };
-var text = ["Bitte um Rückruf.", "",
-"Name: " + wert("#rrName"),
-"Telefon: " + wert("#rrTel"),
-"Erreichbar: " + (wert("#rrZeit") || "keine Angabe")].join("\n");
-var ziel = form.getAttribute("action") + "&body=" + encodeURIComponent(text);
-window.location.href = ziel;
+var zeilen = [];
+$$("input, textarea", form).forEach(function (feld) {
+if (!feld.name || feld.type === "checkbox") return;
+zeilen.push(feld.name + ": " + ((feld.value || "").trim() || "keine Angabe"));
+});
+var text = zeilen.join("\n");
+window.location.href = form.getAttribute("action") + "&body=" + encodeURIComponent(text);
 if (status) {
 status.textContent = "Dein Mailprogramm öffnet sich mit der fertigen Nachricht. "
 + "Abschicken nicht vergessen — oder ruf uns einfach an.";
 }
 });
-})();
+});
 })();
 
 (function(){

@@ -27,7 +27,7 @@
       <div class="navbar">
         <a class="logo" href="/osteomedis-vorschau/a/" data-cursor>
           <img class="logo-mark logo-paul" src="/osteomedis-vorschau/assets/paul-logo-farbe.svg" width="40" height="35" alt="" aria-hidden="true">
-          <span class="logo-type"><b>Praxis Paul Seeger</b><i>Osteopathie · Performance</i></span>
+          <span class="logo-type"><b>Praxis Paul Seeger</b><i>Schmerztherapie · Performance · Regeneration</i></span>
         </a>
         <ul class="navlinks" id="navlinks"><span class="navhi" aria-hidden="true"></span>
           <li><a href="/osteomedis-vorschau/a/">Start</a></li>
@@ -52,7 +52,7 @@
           <h1 class="fade" style="--d:.08s;margin-top:1rem">Wo du uns findest.</h1>
           <div class="answer fade" style="--d:.16s">
             <p class="eyebrow">Kurz gesagt</p>
-            <p>Die Praxis liegt am Kesselbacher Weg 19 in 65510 Idstein. Geöffnet ist Mo–Fr 10:00–19:00 Uhr. Termine buchst du online rund um die Uhr oder telefonisch unter 0157 555 363 57. Eine Überweisung brauchst du nicht.</p>
+            <p>Termine und Sprechzeiten erfolgen nach vorheriger Vereinbarung. Unsere Rezeption ist zu den üblichen Sprechzeiten für dich erreichbar. Da unser Team zeitweise auch direkt in der Behandlung tätig ist, kann es vorkommen, dass wir nicht jeden Anruf unmittelbar entgegennehmen können. Für Terminwünsche und allgemeine Anfragen kannst du uns daher gerne auch per E-Mail kontaktieren. Wenn du eine persönliche Beratung wünschst, hinterlasse uns einfach eine Nachricht mit deinem Anliegen und deinen Kontaktdaten. Wir melden uns schnellstmöglich bei dir zurück.</p>
           </div>
           <div class="hero-actions fade" style="--d:.24s">
             <button class="btn btn-lg js-book" data-cursor>Termin buchen
@@ -60,13 +60,31 @@
             <a class="ln-link" href="/osteomedis-vorschau/a/preise/">Preise und Erstattung →</a>
           </div>
         </div>
-        <aside class="factcard fade" style="--d:.2s">
-          <p class="eyebrow">Auf einen Blick</p>
-          <dl><div><dt>Behandlung</dt><dd>60 Min · <span class="em">160 €</span></dd></div><div><dt>Umfang</dt><dd>nach Befund, ohne Aufpreis</dd></div><div><dt>Überweisung</dt><dd>nicht nötig</dd></div><div><dt>Erstattung</dt><dd>viele Kassen anteilig</dd></div></dl>
-          <button class="btn js-book" data-cursor>Termin buchen <span class="arw">→</span></button>
-          <p class="next" data-termin><span class="pulse"></span>
-            <span>Nächster Termin</span><b id="nextSlotShort">–</b></p>
-        </aside>
+        <form class="rr-form kontaktform js-mailform fade" id="kfForm" method="post"
+              enctype="text/plain" action="mailto:praxis@osteomedis.de?subject=Anfrage%20%C3%BCber%20die%20Website" data-endpunkt=""
+              style="--d:.2s">
+          <p class="eyebrow">Schreib uns</p>
+          <div class="fields">
+            <div class="field"><label for="kfName">Name</label>
+              <input id="kfName" name="Name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="kfTel">Telefon (optional)</label>
+              <input id="kfTel" name="Telefon" type="tel" autocomplete="tel"></div>
+            <div class="field wide"><label for="kfMail">E-Mail</label>
+              <input id="kfMail" name="E-Mail" type="email" autocomplete="email" required></div>
+            <div class="field wide"><label for="kfMsg">Dein Anliegen</label>
+              <textarea id="kfMsg" name="Nachricht" rows="4" required></textarea></div>
+            <div class="field wide">
+              <label class="check" for="kfOk"><input id="kfOk" name="Einwilligung"
+                type="checkbox" value="ja" required>
+                <span>Meine Angaben dürfen für die Beantwortung meiner Anfrage gespeichert
+                  und verwendet werden. Mehr dazu in der
+                  <a href="/osteomedis-vorschau/a/datenschutz/">Datenschutzerklärung</a>.</span></label>
+            </div>
+          </div>
+          <button class="btn" type="submit" data-cursor>Nachricht senden
+            <span class="arw">&#8594;</span></button>
+          <p class="rr-status" id="kfStatus" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </section>
@@ -105,43 +123,6 @@
       </div>
     </div>
   </div></section>
-  <section class="sec sec-anschluss" id="rueckruf">
-    <div class="wrap">
-      <div class="rueckruf fade">
-        <div>
-          <p class="eyebrow">Lieber zurückrufen lassen?</p>
-          <h2 class="d3" style="margin-top:.9rem">Nummer hinterlassen,<br>wir melden uns.</h2>
-          <p class="body" style="margin-top:1.2rem">Zwei Angaben genügen. Wir rufen im
-            angegebenen Zeitfenster zurück, in der Regel noch am selben Werktag. Wer den
-            Termin sofort festmachen will, ist mit der Online-Buchung schneller.</p>
-          <p class="microcopy" style="margin-top:1.2rem">Oder direkt anrufen:
-            <a href="tel:+4915755536357" data-cursor>0157 555 363 57</a></p>
-        </div>
-        <form class="rr-form" id="rrForm" method="post" enctype="text/plain" action="mailto:praxis@osteomedis.de?subject=R%C3%BCckruf%20erbeten"
-              data-endpunkt="">
-          <div class="fields">
-            <div class="field"><label for="rrName">Name</label>
-              <input id="rrName" name="Name" type="text" autocomplete="name" required></div>
-            <div class="field"><label for="rrTel">Telefonnummer</label>
-              <input id="rrTel" name="Telefon" type="tel" autocomplete="tel" required></div>
-            <div class="field wide"><label for="rrZeit">Wann erreichen wir dich? (optional)</label>
-              <input id="rrZeit" name="Erreichbar" type="text"
-                     placeholder="zum Beispiel werktags ab 16 Uhr"></div>
-            <div class="field wide">
-              <label class="check" for="rrOk"><input id="rrOk" name="Einwilligung"
-                type="checkbox" value="ja" required>
-                <span>Meine Angaben dürfen für den Rückruf gespeichert und verwendet werden.
-                  Mehr dazu in der <a href="/osteomedis-vorschau/a/datenschutz/">Datenschutzerklärung</a>.</span></label>
-            </div>
-          </div>
-          <button class="btn" type="submit" data-cursor>Rückruf erbitten
-            <span class="arw">&#8594;</span></button>
-          <p class="rr-status" id="rrStatus" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-      <p class="note"><b>Vor dem Livegang:</b> Solange das Hosting kein Mailskript hat, öffnet der Knopf das Mailprogramm der Besucherin. Sobald der Endpunkt steht, wird er in <code>SITE["formular_endpunkt"]</code> eingetragen — dann verschickt das Formular selbst und braucht kein Mailprogramm mehr.
-    </div>
-  </section>
   <section class="sec faqsec" id="faq">
     <div class="wrap">
       <div class="sec-head wide"><p class="eyebrow fade">Häufige Fragen</p>
@@ -167,7 +148,7 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <a class="logo" href="/osteomedis-vorschau/a/" data-cursor><img class="logo-mark logo-paul" src="/osteomedis-vorschau/assets/paul-logo-farbe.svg" width="40" height="35" alt="" aria-hidden="true">
-            <span class="logo-type"><b>Praxis Paul Seeger</b><i>Osteopathie · Performance</i></span></a>
+            <span class="logo-type"><b>Praxis Paul Seeger</b><i>Schmerztherapie · Performance · Regeneration</i></span></a>
           <p class="body" style="margin-top:1.35rem;font-size:.9375rem">
             Praxis für Osteopathie, Chiropraktik und Performance — Paul Seeger<br>Kesselbacher Weg 19, 65510 Idstein</p>
           <p class="foot-status"><span class="dot" aria-hidden="true"></span>Mo–Fr 10:00–19:00 Uhr</p>

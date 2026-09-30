@@ -610,135 +610,39 @@ infusion:[
 {n:"Behandlung plus Infusion", d:"90 Min", p:"n. n."}]
 };
 var LBL = {beschwerden:"Beschwerden", performance:"Performance", infusion:"Infusion"};
+
 var bk = $("#booking");
 if (bk){
-var st = {step:1,intent:null,svc:null,day:null,time:null}, lastFocus=null;
-function setWorld(w){
-
-bk.classList.remove("w-infusion");
-bk.classList.toggle("w-therapy", w!=="infusion");
-$("#bkWorld").textContent = w==="infusion" ? "Infusion · Terminbuchung" : "Terminbuchung";
-}
-function openBooking(w, intent){
+var lastFocus=null;
+function openBooking(){
 lastFocus = document.activeElement;
 bk.classList.add("is-open"); document.body.style.overflow="hidden";
-setWorld(w || (intent==="infusion" ? "infusion" : "therapy"));
-if (intent){ st.intent = intent; renderSvc(); goStep(2); }
-else { goStep(1); }
-var f = bk.querySelector(".bstep.on button"); if (f) f.focus();
+var f = bk.querySelector("a.wahl, .wahl-mail a"); if (f) f.focus();
 }
 function closeBooking(){
 bk.classList.remove("is-open"); document.body.style.overflow="";
 if (lastFocus) lastFocus.focus();
 }
 $$(".js-book").forEach(function(b){
-b.addEventListener("click", function(e){
-e.preventDefault();
-openBooking(b.dataset.world, b.dataset.topic);
-});
+b.addEventListener("click", function(e){ e.preventDefault(); openBooking(); });
 });
 $("#bkClose").addEventListener("click", closeBooking);
 bk.addEventListener("click", function(e){ if(e.target===bk) closeBooking(); });
+$$("a", bk).forEach(function(a){
+a.addEventListener("click", function(){
+bk.classList.remove("is-open"); document.body.style.overflow="";
+});
+});
 document.addEventListener("keydown", function(e){
 if (!bk.classList.contains("is-open")) return;
 if (e.key === "Escape"){ closeBooking(); return; }
 if (e.key !== "Tab") return;
-var f = $$('a[href],button:not(:disabled),input,textarea,select,[tabindex]:not([tabindex="-1"])', bk)
+var f = $$('a[href],button:not(:disabled)', bk)
 .filter(function(el){ return el.offsetParent !== null; });
 if (!f.length) return;
 var first=f[0], last=f[f.length-1];
 if (e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
 else if (!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-});
-function goStep(n){
-st.step = n;
-$$(".bstep", bk).forEach(function(s){ s.classList.toggle("on", Number(s.dataset.step)===n); });
-$("#bkFill").style.width = Math.min(n,4)*25 + "%";
-var L = $("#bkSteps").children;
-for (var i=0;i<L.length;i++) L[i].className = (n>4 || i+1<n) ? "done" : (i+1===n ? "now" : "");
-bk.scrollTop = 0;
-}
-$$("[data-intent]", bk).forEach(function(b){
-b.addEventListener("click", function(){
-st.intent = b.dataset.intent;
-setWorld(st.intent==="infusion" ? "infusion" : "therapy");
-renderSvc(); goStep(2);
-});
-});
-function renderSvc(){
-var list = $("#bkSvc");
-$("#bkHint").textContent = st.intent==="infusion"
-? "Beim ersten Mal ist die Erstberatung Pflicht — dabei legen wir deine Zusammenstellung fest."
-: "Du bist unsicher? Wähle die Erstbehandlung — wir klären den Rest im Termin.";
-list.innerHTML = "";
-(SERVICES[st.intent] || SERVICES.beschwerden).forEach(function(s){
-var b = document.createElement("button");
-b.setAttribute("data-cursor","");
-var nb=document.createElement("b"); nb.textContent=s.n;
-var du=document.createElement("span"); du.className="du"; du.textContent=s.d;
-var pr=document.createElement("span"); pr.className="pr"; pr.textContent=s.p;
-b.appendChild(nb); b.appendChild(du); b.appendChild(pr);
-b.addEventListener("click", function(){ st.svc=s; renderDays(); goStep(3); });
-list.appendChild(b);
-});
-}
-function renderDays(){
-var wrap = $("#bkDays"); wrap.innerHTML="";
-if (!TQ.token && !TQ.beispiel){
-var hin = document.createElement("p");
-hin.className = "bk-hinweis";
-hin.textContent = "Die Online-Buchung wird gerade angebunden. Ruf bitte kurz an, "
-+ "dann finden wir sofort einen Termin.";
-wrap.appendChild(hin);
-var sl = $("#bkSlots"); if (sl) sl.innerHTML = "";
-return;
-}
-DAYS.forEach(function(d,i){
-var b=document.createElement("button");
-b.className="day"; b.type="button";
-b.setAttribute("aria-pressed","false"); b.setAttribute("data-cursor","");
-b.innerHTML = '<span class="dw">'+DOW[d.getDay()]+'</span><span class="dn">'+
-String(d.getDate()).padStart(2,"0")+'</span><span class="mo">'+MON[d.getMonth()]+'</span>';
-b.addEventListener("click", function(){
-$$(".day",wrap).forEach(function(x){ x.setAttribute("aria-pressed","false"); });
-b.setAttribute("aria-pressed","true");
-st.day=d; st.time=null; renderSlots(d,i);
-});
-wrap.appendChild(b);
-});
-var ersterTag = wrap.querySelector(".day");
-if (ersterTag) ersterTag.click();
-}
-function renderSlots(d,i){
-var wrap=$("#bkSlots"); wrap.innerHTML="";
-slotsFor(d,i).forEach(function(s){
-var b=document.createElement("button");
-b.className="slot"; b.type="button"; b.textContent=s.time;
-b.setAttribute("aria-pressed","false"); b.setAttribute("data-cursor","");
-if (!s.free){ b.disabled=true; b.title="belegt"; }
-b.addEventListener("click", function(){
-$$(".slot",wrap).forEach(function(x){ x.setAttribute("aria-pressed","false"); });
-b.setAttribute("aria-pressed","true"); st.time=s.time; renderSum();
-setTimeout(function(){ goStep(4); }, RM?0:280);
-});
-wrap.appendChild(b);
-});
-}
-function renderSum(){
-var d=st.day;
-var when = DOWL[d.getDay()]+", "+d.getDate()+". "+MONL[d.getMonth()]+" um "+st.time+" Uhr";
-var rows=[["Anliegen",LBL[st.intent]],["Leistung",st.svc.n],["Dauer",st.svc.d],
-["Termin",when],["Kosten",st.svc.p]];
-var html = rows.map(function(r){
-return '<div><span class="k">'+r[0]+'</span><span class="v">'+r[1]+'</span></div>'; }).join("");
-$("#bkSum").innerHTML = html; $("#bkSum2").innerHTML = html;
-}
-$("#bkSubmit").addEventListener("click", function(){ goStep(5); });
-$("#bkRestart").addEventListener("click", function(){
-st={step:1,intent:null,svc:null,day:null,time:null}; setWorld("therapy"); goStep(1);
-});
-$$(".bback", bk).forEach(function(b){
-b.addEventListener("click", function(){ goStep(Math.max(1, st.step-1)); });
 });
 }
 })();

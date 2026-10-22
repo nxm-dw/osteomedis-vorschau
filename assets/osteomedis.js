@@ -697,16 +697,17 @@ try { localStorage.setItem("osteomedis-entwurf", el.dataset.ent); } catch(e){}
 });
 
 (function () {
-var start = document.querySelector(".film-start");
-if (!start) return;
+Array.prototype.forEach.call(document.querySelectorAll(".film-start"), function (start) {
 start.addEventListener("click", function () {
 var rahmen = document.createElement("iframe");
-rahmen.src = "https://player.vimeo.com/video/" + this.dataset.vimeo + "?autoplay=1&dnt=1";
-rahmen.title = "Imagefilm Osteomedis";
+rahmen.src = "https://player.vimeo.com/video/" + this.dataset.vimeo + "?autoplay=1&dnt=1" +
+(this.dataset.h ? "&h=" + this.dataset.h : "");
+rahmen.title = this.dataset.titel || "Imagefilm Osteomedis";
 rahmen.allow = "autoplay; fullscreen; picture-in-picture";
 rahmen.setAttribute("allowfullscreen", "");
 this.parentNode.replaceChild(rahmen, this);
 rahmen.focus();
+});
 });
 })();
 

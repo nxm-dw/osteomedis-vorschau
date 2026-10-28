@@ -43,7 +43,7 @@
     </div>
   </nav>
 <main id="inhalt" tabindex="-1">
-  <section class="sec pagehero pagehero-kompakt">
+  <section class="sec pagehero pagehero-kompakt pagehero-kontakt">
     <div class="wrap">
       <nav class="crumbs" aria-label="Brotkrümelnavigation"><a href="/osteomedis-vorschau/b/">Start</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Kontakt</span></nav>
       <div class="kkopf">
@@ -53,8 +53,8 @@
           <form class="kontaktform js-mailform fade" id="kfForm" method="post"
               enctype="text/plain" action="mailto:praxis@osteomedis.de?subject=Anfrage%20%C3%BCber%20die%20Website" data-endpunkt=""
               style="--d:.2s">
-          <h2 class="kf-titel">Schreib uns.</h2>
-          <p class="kf-unter">Wir melden uns schnellstmöglich bei dir zurück.</p>
+          <div class="kf-kopfzeile"><h2 class="kf-titel">Schreib uns.</h2>
+            <p class="kf-unter">Wir melden uns schnellstmöglich bei dir zurück.</p></div>
           <p class="kf-akut"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>
             <span><b>Akute Schmerzen?</b> Auch Akuttermine kannst du hier anfragen.</span></p>
           <fieldset class="kf-gruppe">
@@ -73,6 +73,7 @@
                 placeholder="Beschwerden, Wunschtermin, Frage …"
                 data-akut="Wo tut es weh, seit wann, und wann kannst du kommen?"></textarea></p>
           </div>
+          <div class="kf-fuss">
           <label class="check kf-ok" for="kfOk"><input id="kfOk" name="Einwilligung"
             type="checkbox" value="ja" required>
             <span>Meine Angaben dürfen zur Beantwortung verwendet werden.
@@ -80,6 +81,7 @@
           <button class="btn kf-senden" type="submit" data-cursor><span class="kf-senden-text"
             data-akut="Akuttermin anfragen">Nachricht senden</span>
             <span class="arw">&#8594;</span></button>
+          </div>
           <p class="rr-status" id="kfStatus" role="status" aria-live="polite"></p>
         </form>
         </div>

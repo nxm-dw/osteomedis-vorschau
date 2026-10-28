@@ -53,8 +53,11 @@
           <form class="kontaktform js-mailform fade" id="kfForm" method="post"
               enctype="text/plain" action="mailto:praxis@osteomedis.de?subject=Anfrage%20%C3%BCber%20die%20Website" data-endpunkt=""
               style="--d:.2s">
-          <div class="kf-kopfzeile"><h2 class="kf-titel">Schreib uns.</h2>
-            <p class="kf-unter">Wir melden uns schnellstmöglich bei dir zurück.</p></div>
+          <div class="kf-kopf2">
+            <div class="kf-kopfzeile"><h2 class="kf-titel">Schreib uns.</h2>
+              <p class="kf-unter">Wir melden uns schnellstmöglich bei dir zurück.</p></div>
+            <img class="kf-logo" src="/osteomedis-vorschau/assets/paul-logo-weiss.svg" width="1100" height="962" alt="">
+          </div>
           <p class="kf-akut"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>
             <span><b>Akute Schmerzen?</b> Auch Akuttermine kannst du hier anfragen.</span></p>
           <fieldset class="kf-gruppe">
@@ -76,8 +79,7 @@
           <div class="kf-fuss">
           <label class="check kf-ok" for="kfOk"><input id="kfOk" name="Einwilligung"
             type="checkbox" value="ja" required>
-            <span>Meine Angaben dürfen zur Beantwortung verwendet werden.
-              <a href="/osteomedis-vorschau/b/datenschutz/">Datenschutz</a></span></label>
+            <span>Ich stimme der <a href="/osteomedis-vorschau/b/datenschutz/">Datenschutzerklärung</a> zu.</span></label>
           <button class="btn kf-senden" type="submit" data-cursor><span class="kf-senden-text"
             data-akut="Akuttermin anfragen">Nachricht senden</span>
             <span class="arw">&#8594;</span></button>
@@ -154,7 +156,9 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <a class="logo" href="/osteomedis-vorschau/b/" data-cursor><img class="logo-mark logo-paul" src="/osteomedis-vorschau/assets/paul-logo-farbe.svg" width="40" height="35" alt="" aria-hidden="true">
-            <span class="logo-type"><b>Praxis Paul Seeger</b><i>Schmerztherapie · Performance · Regeneration</i></span></a>
+            <span class="logo-type"><b>Praxis Paul Seeger</b></span></a>
+          <ul class="foot-fokus" aria-label="Schwerpunkte">
+            <li>Schmerztherapie</li><li>Performance</li><li>Regeneration</li></ul>
           <p class="body" style="margin-top:1.35rem;font-size:.9375rem">
             Praxis für Osteopathie, Chiropraktik und Performance — Paul Seeger<br>Kesselbacher Weg 19, 65510 Idstein</p>
           <p class="foot-status"><span class="dot" aria-hidden="true"></span>Mo–Fr 10:00–19:00 Uhr</p>

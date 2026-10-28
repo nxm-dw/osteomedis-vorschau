@@ -624,10 +624,32 @@ document.head.appendChild(s);
 var warte = setInterval(function(){
 if ($("#pss-content")){ clearInterval(warte); $("#lemLaed").hidden = true; }
 }, 300);
+var lang = function(el){ return (el.textContent || "").length > 1500; };
+var langKlappen = function(){
+$$("#pss div, #pss section").forEach(function(el){
+if (el.dataset.lemLang || el.closest("[data-lem-lang]") || !lang(el)) return;
+if (el.querySelector("input,select,textarea,button")) return;
+var n = el.textContent.length;
+if ([].some.call(el.children, function(k){ return (k.textContent||"").length > n*.8; })) return;
+el.dataset.lemLang = "zu";
+var b = document.createElement("button");
+b.type = "button"; b.className = "lem-lang-knopf";
+b.setAttribute("aria-expanded", "false");
+b.textContent = "Ganzen Text anzeigen";
+b.addEventListener("click", function(){
+var zu = el.dataset.lemLang === "zu";
+el.dataset.lemLang = zu ? "auf" : "zu";
+b.setAttribute("aria-expanded", String(zu));
+b.textContent = zu ? "Text wieder einklappen" : "Ganzen Text anzeigen";
+});
+el.parentNode.insertBefore(b, el.nextSibling);
+});
+};
 new MutationObserver(function(){
 $$("#pss select:not([aria-label])").forEach(function(el){
 if (!el.labels || !el.labels.length) el.setAttribute("aria-label", "Sprache");
 });
+langKlappen();
 }).observe(lem, {childList:true, subtree:true});
 };
 $("#lemLaden").addEventListener("click", lemLaden);

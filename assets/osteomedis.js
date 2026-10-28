@@ -611,6 +611,29 @@ infusion:[
 };
 var LBL = {beschwerden:"Beschwerden", performance:"Performance", infusion:"Infusion"};
 
+var lem = $("#lemKalender");
+if (lem){
+var lemLaden = function(){
+if (window.pssConfig) return;
+window.pssConfig = {host:"https://my.lemniscus.de", token:lem.dataset.token,
+showMainVideoTeaser:false, showTermineTeaser:true, showFooter:false};
+$("#lemTor").hidden = true; $("#lemLaed").hidden = false;
+var s = document.createElement("script");
+s.src = window.pssConfig.host + "/lem/app.nocache-pss.js?v=" + Date.now();
+document.head.appendChild(s);
+var warte = setInterval(function(){
+if ($("#pss-content")){ clearInterval(warte); $("#lemLaed").hidden = true; }
+}, 300);
+new MutationObserver(function(){
+$$("#pss select:not([aria-label])").forEach(function(el){
+if (!el.labels || !el.labels.length) el.setAttribute("aria-label", "Sprache");
+});
+}).observe(lem, {childList:true, subtree:true});
+};
+$("#lemLaden").addEventListener("click", lemLaden);
+if (location.hash === "#kalender") lemLaden();
+}
+
 var bk = $("#booking");
 if (bk){
 var lastFocus=null;

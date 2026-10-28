@@ -3,12 +3,15 @@
 > Praxis für Osteopathie, Chiropraktik und Performance in Idstein. Inhaberin der Heilkundeerlaubnis: Paul Seeger. 5.0 Sterne aus 183 Google-Bewertungen. Termine ohne Überweisung.
 
 ## Beschwerdebilder
-- [Rücken & Nacken](https://osteomedis.de/beschwerden/ruecken-nacken/): Verspannungen, Blockaden, Ischias, Bandscheibe
-- [Kopf & Migräne](https://osteomedis.de/beschwerden/kopfschmerz-migraene/): Spannungskopfschmerz, Migräne, Schwindel
-- [Kiefer & CMD](https://osteomedis.de/beschwerden/kiefer-cmd/): Knirschen, Kieferschmerz, Tinnitus
-- [Nach der Verletzung](https://osteomedis.de/performance/nach-der-verletzung/): Zurück in Belastung, ohne Rückfall
-- [Regeneration](https://osteomedis.de/performance/regeneration/): Nach Wettkampf und harten Trainingsblöcken
-- [Leistung & Prävention](https://osteomedis.de/performance/leistung-praevention/): Dysbalancen finden, bevor sie wehtun
+- [Rücken](https://osteomedis.de/beschwerden/ruecken/): Hexenschuss, Ischias, Blockaden, Bandscheibe
+- [Nacken & Kopf](https://osteomedis.de/beschwerden/nacken-kopf/): Verspannung, Spannungskopfschmerz, Migräne, Schwindel
+- [Kiefer](https://osteomedis.de/beschwerden/kiefer-cmd/): Knacken, Knirschen, Kieferschmerz, Tinnitus
+- [Schulter](https://osteomedis.de/beschwerden/schulter/): Kalkschulter, Impingement, Sehnenreizung
+- [Ellenbogen](https://osteomedis.de/beschwerden/ellenbogen/): Tennisarm, Golferarm, Sehnenansatz
+- [Handgelenk](https://osteomedis.de/beschwerden/handgelenk/): Sehnenscheide, Überlastung, nach dem Sturz
+- [Hüfte](https://osteomedis.de/beschwerden/huefte/): Leiste, Gesäß, eingeschränkte Drehung
+- [Knie](https://osteomedis.de/beschwerden/knie/): Läuferknie, Patellasehne, nach der Verletzung
+- [Fuß](https://osteomedis.de/beschwerden/fuss/): Fersensporn, Achillessehne, Sprunggelenk
 
 ## Behandlungsmethoden
 - [Osteopathie](https://osteomedis.de/leistungen/osteopathie/): im Termin enthalten

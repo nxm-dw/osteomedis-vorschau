@@ -560,7 +560,7 @@ $$("[data-termin]").forEach(function(el){
 if (el.querySelector(".termin-beispiel")) return;
 var m = document.createElement("span");
 m.className = "termin-beispiel";
-m.textContent = "Beispielzeit · Buchung folgt";
+m.textContent = "Beispielzeit";
 el.appendChild(m);
 });
 }
@@ -570,7 +570,7 @@ return fetch("https://my.lemniscus.de/mvc/pss/teaser?token=" + encodeURIComponen
 {mode:"cors", credentials:"omit"})
 .then(function(r){ if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
 .then(function(j){
-var liste = j && (j.slots || j.termine || j.appointments || (Array.isArray(j) ? j : null));
+var liste = j && (j.teasers || j.slots || j.termine || j.appointments || (Array.isArray(j) ? j : null));
 if (!liste || !liste.length) throw new Error("keine Zeiten");
 var erst = liste[0];
 var d = new Date(erst.start || erst.datum || erst.date || erst);

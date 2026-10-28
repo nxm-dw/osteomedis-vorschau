@@ -733,9 +733,10 @@ beschriften();
 })();
 
 (function(){
+var $  = function(s,r){ return (r||document).querySelector(s); };
+var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
 var leiste = document.querySelector(".entwahl");
-if (!leiste) return;
-Array.prototype.forEach.call(leiste.querySelectorAll("[data-ent]"), function(el){
+if (leiste) Array.prototype.forEach.call(leiste.querySelectorAll("[data-ent]"), function(el){
 el.addEventListener("click", function(){
 try { localStorage.setItem("osteomedis-entwurf", el.dataset.ent); } catch(e){}
 });
@@ -839,6 +840,34 @@ if (!feld.form.contains(e.target)) zeichne([]);
 });
 })();
 
+
+(function(){
+var el = $("#kStatus"); if (!el) return;
+var auf = +el.dataset.auf, zu = +el.dataset.zu, n = new Date();
+var t = n.getDay(), h = n.getHours() + n.getMinutes()/60;
+var werktag = t >= 1 && t <= 5, offen = werktag && h >= auf && h < zu;
+var naechst;
+if (offen) naechst = "Jetzt geöffnet, bis " + zu + ":00 Uhr";
+else if (werktag && h < auf) naechst = "Öffnet heute um " + auf + ":00 Uhr";
+else naechst = "Geschlossen, wieder " + ((t >= 1 && t <= 4) ? "morgen" : "am Montag") + " ab " + auf + ":00 Uhr";
+el.textContent = naechst;
+el.classList.toggle("ist-offen", offen);
+el.hidden = false;
+})();
+
+$$(".kontaktform").forEach(function (form) {
+var msg = form.querySelector("#kfMsg"), knopf = form.querySelector(".kf-senden-text");
+if (!msg || !knopf) return;
+var normal = {p: msg.getAttribute("placeholder"), k: knopf.textContent};
+function zeigen(){
+var akut = !!form.querySelector('[data-anliegen="akut"]:checked');
+form.classList.toggle("ist-akut", akut);
+msg.setAttribute("placeholder", akut ? msg.dataset.akut : normal.p);
+knopf.textContent = akut ? knopf.dataset.akut : normal.k;
+}
+$$('input[name="Anliegen"]', form).forEach(function (r) { r.addEventListener("change", zeigen); });
+zeigen();
+});
 $$(".js-mailform").forEach(function (form) {
 if (form.dataset.endpunkt) return;          // echter Endpunkt: normal abschicken
 var status = form.querySelector(".rr-status");
@@ -848,10 +877,14 @@ e.preventDefault();
 var zeilen = [];
 $$("input, textarea", form).forEach(function (feld) {
 if (!feld.name || feld.type === "checkbox") return;
+if (feld.type === "radio" && !feld.checked) return;
 zeilen.push(feld.name + ": " + ((feld.value || "").trim() || "keine Angabe"));
 });
 var text = zeilen.join("\n");
-window.location.href = form.getAttribute("action") + "&body=" + encodeURIComponent(text);
+var ziel = form.getAttribute("action");
+if (form.classList.contains("ist-akut"))
+ziel = ziel.replace(/subject=[^&]*/, "subject=" + encodeURIComponent("Akuttermin-Anfrage über die Website"));
+window.location.href = ziel + "&body=" + encodeURIComponent(text);
 if (status) {
 status.textContent = "Dein Mailprogramm öffnet sich mit der fertigen Nachricht. "
 + "Abschicken nicht vergessen — oder ruf uns einfach an.";

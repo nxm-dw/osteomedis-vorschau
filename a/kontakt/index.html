@@ -37,98 +37,93 @@
           <li><a href="/osteomedis-vorschau/a/kontakt/" aria-current="page">Kontakt</a></li>
         </ul>
         <button class="navtoggle" type="button" id="navToggle" aria-expanded="false" aria-controls="navlinks" data-cursor><span class="navtoggle-ico" aria-hidden="true"></span><span class="sr">Menü öffnen</span></button>
-        <a class="btn" href="/osteomedis-vorschau/a/kontakt/" data-cursor>Termin buchen</a>
+        <button class="btn js-book" data-cursor>Termin buchen</button>
       </div>
     </div>
   </nav>
 <main id="inhalt" tabindex="-1">
   <section class="sec pagehero pagehero-kompakt">
-    
     <div class="wrap">
       <nav class="crumbs" aria-label="Brotkrümelnavigation"><a href="/osteomedis-vorschau/a/">Start</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Kontakt</span></nav>
-      <div class="phero">
-        <div>
+      <div class="kkopf">
+        <div class="kkopf-form">
           <p class="eyebrow fade heroline">Praxis &amp; Kontakt</p>
           <h1 class="fade" style="--d:.08s;margin-top:1rem">Wo du uns findest.</h1>
-          <div class="answer fade" style="--d:.16s">
-            <p class="eyebrow">Kurz gesagt</p>
-            <p>Termine und Sprechzeiten erfolgen nach vorheriger Vereinbarung. Unsere Rezeption ist zu den üblichen Sprechzeiten für dich erreichbar. Da unser Team zeitweise auch direkt in der Behandlung tätig ist, kann es vorkommen, dass wir nicht jeden Anruf unmittelbar entgegennehmen können. Für Terminwünsche und allgemeine Anfragen kannst du uns daher gerne auch per E-Mail kontaktieren. Wenn du eine persönliche Beratung wünschst, hinterlasse uns einfach eine Nachricht mit deinem Anliegen und deinen Kontaktdaten. Wir melden uns schnellstmöglich bei dir zurück.</p>
-          </div>
-          <div class="hero-actions fade" style="--d:.24s">
-            <a class="btn btn-lg" href="/osteomedis-vorschau/a/termin/#kalender" data-cursor>Termin buchen
-              <span class="arw">→</span></a><a class="ln-link" href="/osteomedis-vorschau/a/preise/">Preise und Erstattung →</a>
-          </div>
-        </div>
-        <form class="kontaktform js-mailform fade" id="kfForm" method="post"
+          <form class="kontaktform js-mailform fade" id="kfForm" method="post"
               enctype="text/plain" action="mailto:praxis@osteomedis.de?subject=Anfrage%20%C3%BCber%20die%20Website" data-endpunkt=""
               style="--d:.2s">
-          <p class="eyebrow kf-kopf">Schreib uns</p>
-          <div class="kf-stufe">
-            <span class="kf-nr" aria-hidden="true">01</span>
-            <div class="kf-inhalt">
-              <h2 class="kf-frage">Wer schreibt uns?</h2>
-              <div class="kf-felder">
-                <p class="kf-feld"><input id="kfName" name="Name" type="text"
-                     autocomplete="name" placeholder=" " required>
-                  <label for="kfName">Name</label></p>
-                <p class="kf-feld"><input id="kfMail" name="E-Mail" type="email"
-                     autocomplete="email" placeholder=" " required>
-                  <label for="kfMail">E-Mail</label></p>
-              </div>
-            </div>
-          </div>
-          <div class="kf-stufe">
-            <span class="kf-nr" aria-hidden="true">02</span>
-            <div class="kf-inhalt">
-              <h2 class="kf-frage">Worum geht es?</h2>
-              <p class="kf-feld"><textarea id="kfMsg" name="Nachricht" rows="3"
-                   placeholder=" " required></textarea>
-                <label for="kfMsg">Beschwerden, Wunschtermin, Frage …</label></p>
-            </div>
+          <h2 class="kf-titel">Schreib uns.</h2>
+          <p class="kf-unter">Wir melden uns schnellstmöglich bei dir zurück.</p>
+          <p class="kf-akut"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>
+            <span><b>Akute Schmerzen?</b> Auch Akuttermine kannst du hier anfragen.</span></p>
+          <fieldset class="kf-gruppe">
+            <legend>Worum geht es?</legend>
+            <div class="kf-chips"><label class="kf-chip"><input type="radio" name="Anliegen" value="Akuttermin" data-anliegen="akut"><span>Akuttermin</span></label><label class="kf-chip"><input type="radio" name="Anliegen" value="Termin" checked data-anliegen="termin"><span>Termin</span></label><label class="kf-chip"><input type="radio" name="Anliegen" value="Frage" data-anliegen="frage"><span>Frage</span></label><label class="kf-chip"><input type="radio" name="Anliegen" value="Infusion" data-anliegen="infusion"><span>Infusion</span></label></div>
+          </fieldset>
+          <div class="kf-felder">
+            <p class="kf-feld"><label for="kfName">Name</label>
+              <input id="kfName" name="Name" type="text" autocomplete="name" required></p>
+            <p class="kf-feld"><label for="kfMail">E-Mail</label>
+              <input id="kfMail" name="E-Mail" type="email" autocomplete="email" required></p>
+            <p class="kf-feld"><label for="kfTel">Telefon</label>
+              <input id="kfTel" name="Telefon" type="tel" autocomplete="tel"></p>
+            <p class="kf-feld breit"><label for="kfMsg">Deine Nachricht</label>
+              <textarea id="kfMsg" name="Nachricht" rows="3" required
+                placeholder="Beschwerden, Wunschtermin, Frage …"
+                data-akut="Wo tut es weh, seit wann, und wann kannst du kommen?"></textarea></p>
           </div>
           <label class="check kf-ok" for="kfOk"><input id="kfOk" name="Einwilligung"
             type="checkbox" value="ja" required>
-            <span>Meine Angaben dürfen zur Beantwortung verwendet werden —
-              <a href="/osteomedis-vorschau/a/datenschutz/">Datenschutz</a>.</span></label>
-          <button class="btn kf-senden" type="submit" data-cursor>Nachricht senden
+            <span>Meine Angaben dürfen zur Beantwortung verwendet werden.
+              <a href="/osteomedis-vorschau/a/datenschutz/">Datenschutz</a></span></label>
+          <button class="btn kf-senden" type="submit" data-cursor><span class="kf-senden-text"
+            data-akut="Akuttermin anfragen">Nachricht senden</span>
             <span class="arw">&#8594;</span></button>
           <p class="rr-status" id="kfStatus" role="status" aria-live="polite"></p>
         </form>
+        </div>
+        <aside class="kkopf-text fade" style="--d:.16s">
+          <p class="eyebrow">Kurz gesagt</p>
+          <p>Termine gibt es nach vorheriger Vereinbarung. Weil wir oft selbst in der
+            Behandlung sind, erreichst du uns nicht immer sofort am Telefon.</p>
+          <p>Schreib uns am besten über das Formular oder buch dir direkt online einen
+            freien Termin. Wir melden uns schnellstmöglich bei dir zurück.</p>
+          <div class="kkopf-aktion">
+            <a class="btn btn-lg" href="/osteomedis-vorschau/a/kontakt/termin/#kalender" data-cursor>Online-Termin buchen
+              <span class="arw">→</span></a>
+            <a class="ln-link" href="/osteomedis-vorschau/a/preise/">Preise und Erstattung →</a>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
-  <section class="sec"><div class="wrap">
-    <div class="contact fade">
-      <div class="contact-info">
-        <dl class="cdl">
-          <div><dt>Adresse</dt><dd>Kesselbacher Weg 19<br>65510 Idstein</dd></div>
-          <div><dt>Öffnungszeiten</dt><dd>Montag bis Freitag<br>10:00 – 19:00 Uhr</dd></div>
-          <div><dt>E-Mail</dt><dd><a href="mailto:praxis@osteomedis.de">praxis@osteomedis.de</a></dd></div>
-          <div><dt>Telefon</dt><dd><a href="tel:+4915755536357">0157 555 363 57</a></dd></div>
-        </dl>
-        <a class="btn" href="/osteomedis-vorschau/a/termin/#kalender" data-cursor style="margin-top:1.85rem">Termin buchen
-          <span class="arw">→</span></a>
+  <section class="sec kinfo-sec"><div class="wrap">
+    <div class="kinfo fade">
+      <div class="kinfo-text">
+        <p class="eyebrow">Praxis in Idstein</p>
+        <h2 class="kinfo-adr">Kesselbacher Weg 19<br>65510 Idstein</h2>
+        <p class="kinfo-status" id="kStatus" data-auf="10" data-zu="19" hidden></p>
+        <div class="kinfo-kacheln">
+          <div class="kinfo-kachel"><p class="kinfo-k">Öffnungszeiten</p>
+            <p class="kinfo-v">Mo bis Fr<br>10:00 bis 19:00 Uhr</p></div>
+          <a class="kinfo-kachel" href="tel:+4915755536357" data-cursor><p class="kinfo-k">Telefon</p>
+            <p class="kinfo-v">0157 555 363 57</p><span class="kinfo-pfeil" aria-hidden="true">→</span></a>
+          <a class="kinfo-kachel" href="mailto:praxis@osteomedis.de" data-cursor><p class="kinfo-k">E-Mail</p>
+            <p class="kinfo-v">praxis@osteomedis.de</p><span class="kinfo-pfeil" aria-hidden="true">→</span></a>
+          <a class="kinfo-kachel" href="https://www.google.com/maps/dir/?api=1&destination=Kesselbacher+Weg+19%2C+65510+Idstein" target="_blank" rel="noopener noreferrer" data-cursor>
+            <p class="kinfo-k">Anfahrt</p><p class="kinfo-v">Route in Google Maps<span class="sr"> (öffnet in neuem Tab)</span></p>
+            <span class="kinfo-pfeil" aria-hidden="true">↗</span></a>
+        </div>
+        <div class="kinfo-aktion">
+          <a class="btn btn-lg" href="/osteomedis-vorschau/a/kontakt/termin/#kalender" data-cursor>Online-Termin buchen
+            <span class="arw">→</span></a>
+        </div>
       </div>
-      <div class="kontakt-rechts">
-      <figure class="foto quer fade" style="--d:.1s">
+      <figure class="kinfo-bild">
         <img src="/osteomedis-vorschau/assets/praxis.webp" width="1500" height="869" loading="lazy" decoding="async"
-             alt="Blick in die Praxis in Idstein">
+             alt="Paul Seeger am Schreibtisch in der Praxis in Idstein">
+        <figcaption><b>Paul Seeger</b> Heilpraktiker, Osteopathie und Chiropraktik</figcaption>
       </figure>
-      <div class="mapbox">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M-10 90 H410 M-10 168 H410 M-10 232 H410"/>
-          <path d="M78 -10 V310 M196 -10 V310 M304 -10 V310"/>
-          <path d="M-10 128 C 90 120, 150 178, 250 168 S 350 210, 410 196"/>
-        </svg>
-        <span class="pin" aria-hidden="true"></span>
-        <p class="pn">Anfahrt · Platzhalter, statische Karte</p>
-        <p class="mapnote"><a class="ln-link" href="https://www.google.com/maps/dir/?api=1&destination=Kesselbacher+Weg+19%2C+65510+Idstein" target="_blank"
-          rel="noopener noreferrer">Wegbeschreibung in Google Maps öffnen
-          <span aria-hidden="true">→</span></a><br>
-          Die Karte wird <b>nicht</b> eingebettet — das lädt fremde Ressourcen schon beim
-          Aufruf der Seite. Der Verweis lädt erst, wenn du ihn anklickst.</p>
-      </div>
-      </div>
     </div>
   </div></section>
   <section class="sec faqsec" id="faq">
@@ -200,12 +195,12 @@
     <div class="bbody">
       <h2 id="bkTitle">Wie möchtest du Kontakt aufnehmen?</h2>
       <div class="choice choice-2">
-        <a class="wahl" href="/osteomedis-vorschau/a/termin/#kalender" data-cursor><span class="k">Direkt im Kalender</span>
+        <a class="wahl" href="/osteomedis-vorschau/a/kontakt/termin/#kalender" data-cursor><span class="k">Direkt im Kalender</span>
           <strong>Online-Termin buchen</strong>
           <span class="d">Freie Zeit aussuchen und verbindlich buchen.</span></a>
         <a class="wahl" href="/osteomedis-vorschau/a/kontakt/" data-cursor><span class="k">Wir melden uns</span>
           <strong>Kontaktformular</strong>
-          <span class="d">Anliegen schildern, wir schlagen dir einen Termin vor.</span></a>
+          <span class="d">Anliegen schildern, wir schlagen dir einen Termin vor. Auch für Akuttermine.</span></a>
       </div>
       <p class="wahl-mail">Oder per E-Mail:
         <a href="mailto:praxis@osteomedis.de">praxis@osteomedis.de</a></p>

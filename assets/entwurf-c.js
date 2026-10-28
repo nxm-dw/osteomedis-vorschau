@@ -735,6 +735,7 @@ beschriften();
 (function(){
 var $  = function(s,r){ return (r||document).querySelector(s); };
 var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+var RM_TOP = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 var leiste = document.querySelector(".entwahl");
 if (leiste) Array.prototype.forEach.call(leiste.querySelectorAll("[data-ent]"), function(el){
 el.addEventListener("click", function(){
@@ -840,6 +841,15 @@ if (!feld.form.contains(e.target)) zeichne([]);
 });
 })();
 
+
+$$('a[href="#top"]').forEach(function(a){
+a.addEventListener("click", function(e){
+e.preventDefault();
+window.scrollTo({top:0, behavior: RM_TOP ? "auto" : "smooth"});
+var skip = document.querySelector(".skip"); if (skip) skip.focus({preventScroll:true});
+if (history.replaceState) history.replaceState(null, "", location.pathname + location.search);
+});
+});
 
 (function(){
 var el = $("#kStatus"); if (!el) return;
